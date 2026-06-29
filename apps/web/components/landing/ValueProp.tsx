@@ -137,30 +137,33 @@ export const ValueProp: React.FC<ValuePropProps> = () => {
       {/* =========================================
           DESKTOP ONLY (hidden lg:flex)
       ========================================= */}
-      <div className="hidden lg:flex py-10 md:py-24 px-4 md:px-16 max-w-7xl mx-auto flex-col md:flex-row gap-6 md:gap-16">
+      <div className="hidden lg:flex py-[120px] px-[5%] xl:px-[8%] max-w-[1920px] mx-auto flex-col md:flex-row gap-[64px]">
         
         {/* Left Column */}
         <motion.div
-          className="w-full md:w-[40%] md:sticky md:top-24 self-start"
+          className="w-full md:w-[40%] self-start"
           variants={leftColVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          <div className="bg-red-50 text-[#D42B2B] text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full inline-block mb-3 md:mb-4">
-            {valuePropContent.badge}
+          <div className="flex items-center gap-[16px] mb-[16px]">
+            <span className="text-[12px] font-black text-[#D42B2B] tracking-widest uppercase bg-red-50 px-[12px] py-[6px] rounded-[4px]">
+              /// THE HID DIFFERENCE
+            </span>
           </div>
           
-          <h2 className="font-extrabold text-[26px] leading-[1.1] md:text-5xl text-gray-900">
-            {renderHeadline(valuePropContent.headline)}
+          <h2 className="font-black text-[48px] xl:text-[64px] leading-[1.05] text-gray-900 uppercase font-['var(--font-barlow-condensed)'] tracking-tight">
+            WHY CHOOSE <br/>
+            <span className="text-[#D42B2B]">HID POWERTOOLS?</span>
           </h2>
           
-          <p className="text-[14px] md:text-lg text-gray-500 mt-3 md:mt-4 leading-relaxed max-w-md">
-            {valuePropContent.subheadline}
+          <p className="text-[18px] xl:text-[20px] text-gray-500 mt-[32px] leading-relaxed max-w-md">
+            We don't just build tools, we build trust. Every HID product is tested beyond limits to deliver unmatched performance on every job.
           </p>
           
           <motion.div
             variants={closingStatementVariants}
-            className="hidden md:block italic text-sm text-gray-400 border-l-4 border-[#D42B2B] pl-4 mt-8"
+            className="hidden md:block italic text-[16px] text-gray-400 border-l-[4px] border-[#D42B2B] pl-4 mt-[48px]"
           >
             {valuePropContent.closingStatement}
           </motion.div>
@@ -168,7 +171,7 @@ export const ValueProp: React.FC<ValuePropProps> = () => {
 
         {/* Right Column */}
         <motion.div
-          className="w-full md:w-[60%] flex flex-col gap-4 sm:gap-6"
+          className="w-full md:w-[60%] grid grid-cols-2 gap-[24px]"
           variants={rightColContainerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -177,26 +180,22 @@ export const ValueProp: React.FC<ValuePropProps> = () => {
             <motion.div
               key={item.id}
               variants={cardVariants}
-              whileHover={{ scale: 1.02 }}
-              className="group bg-[#f8f9fc] md:bg-white rounded-2xl md:rounded-xl border border-gray-100 p-5 md:p-6 transition-all duration-300 ease-in-out hover:border-[#D42B2B] hover:shadow-sm"
+              className="group bg-[#f8f9fc] rounded-[4px] border border-gray-100 p-[32px] transition-all duration-300 ease-in-out hover:border-[#D42B2B] hover:shadow-md flex flex-col justify-between"
             >
-              <div className="flex flex-row items-center gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl shrink-0" role="img" aria-label="emoji">
-                    {item.emoji}
-                  </span>
-                  <span className="font-bold text-base line-through text-gray-400 decoration-gray-300">
-                    {item.problem}
-                  </span>
+              <div className="flex flex-col gap-[16px]">
+                <div className="w-[48px] h-[48px] rounded-[4px] border border-gray-200 flex items-center justify-center bg-white text-gray-900 shadow-sm text-2xl group-hover:scale-110 transition-transform duration-500">
+                  {item.emoji}
                 </div>
-                <ChevronRight className="text-[#D42B2B] shrink-0 mx-3" size={24} />
-                <div className="flex items-center">
-                  <span className="font-bold text-[#D42B2B] text-base leading-tight">
-                    {item.solution}
-                  </span>
-                </div>
+                <h3 className="font-black text-[#D42B2B] text-[20px] uppercase font-['var(--font-barlow-condensed)'] tracking-tight">
+                  {item.solution}
+                </h3>
               </div>
-              <div className="h-[2px] w-0 group-hover:w-full bg-[#D42B2B] transition-all duration-500 rounded-full mt-4" />
+              <div className="mt-[16px]">
+                <p className="font-medium text-[15px] text-gray-500 leading-relaxed">
+                  Instead of: <span className="line-through text-gray-400">{item.problem}</span>
+                </p>
+              </div>
+              <div className="h-[2px] w-[24px] group-hover:w-[48px] bg-[#D42B2B] transition-all duration-500 mt-[24px]" />
             </motion.div>
           ))}
         </motion.div>

@@ -8,6 +8,7 @@ import ProductSort from '@/components/products/ProductSort'
 import { SearchBar } from '@/components/products/SearchBar'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { Filter } from 'lucide-react'
+import { MobilePLPWrapper } from '@/components/products/MobilePLPWrapper'
 
 export const metadata: Metadata = {
   title: 'All Products — HID PowerTools',
@@ -51,8 +52,25 @@ export default async function ProductsPage({
 
   return (
     <div className="min-h-screen bg-[#f8f9fc]">
-      {/* Header Section */}
-      <div className="bg-white border-b border-gray-100 py-8">
+      
+      {/* Mobile Sticky Header and Bottom Sheet Manager */}
+      <MobilePLPWrapper 
+        categories={categories}
+        currentCategory={category}
+        initialQuery={q}
+        currentSort={sort}
+        currentFilters={{ 
+          inStock, 
+          isFeatured, 
+          isNewArrival, 
+          isBestseller, 
+          minPrice, 
+          maxPrice 
+        }}
+      />
+
+      {/* Desktop Header Section (Hidden on Mobile) */}
+      <div className="hidden lg:block bg-white border-b border-gray-100 py-8">
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <Breadcrumb items={[
             { label: 'Home', href: '/' },
@@ -77,7 +95,7 @@ export default async function ProductsPage({
       </div>
 
       {/* Main Content Layout */}
-      <div className="container mx-auto max-w-7xl px-4 md:px-6 py-8">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6 py-4 lg:py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           
           {/* Desktop Sidebar Filters */}
@@ -99,16 +117,8 @@ export default async function ProductsPage({
           {/* Main Grid Area */}
           <div className="flex-1 flex flex-col">
             
-            {/* Toolbar (Mobile Filter Toggle + Sorting) */}
-            <div className="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-6">
-              <div className="lg:hidden">
-                <button className="flex items-center gap-2 text-gray-700 font-semibold bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
-                  <Filter className="w-4 h-4" />
-                  Filters
-                </button>
-                {/* Mobile Drawer trigger handled inside a client component if needed */}
-              </div>
-              
+            {/* Desktop Toolbar (Hidden on Mobile) */}
+            <div className="hidden lg:flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-6">
               <div className="ml-auto flex items-center gap-3">
                 <span className="text-sm font-medium text-gray-500 hidden sm:inline-block">Sort by:</span>
                 <ProductSort currentSort={sort} />

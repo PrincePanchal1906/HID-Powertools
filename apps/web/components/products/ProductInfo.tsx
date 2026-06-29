@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ShieldCheck, Truck, ShoppingCart, Minus, Plus, Heart } from "lucide-react";
+import { ShieldCheck, Truck, ShoppingCart, Minus, Plus, Heart, Zap, Award } from "lucide-react";
 import type { Product } from "@/types/catalog";
 
 interface ProductInfoProps {
@@ -41,7 +41,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Title */}
-      <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-2">
+      <h1 className="text-2xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-2">
         {product.name}
       </h1>
 
@@ -63,26 +63,46 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Pricing */}
-      <div className="flex items-end gap-3 mb-8">
-        <span className="text-4xl md:text-5xl font-black text-gray-900 leading-none">
+      <div className="flex items-end gap-3 mb-6 lg:mb-8">
+        <span className="text-3xl md:text-5xl font-black text-gray-900 leading-none">
           ₹{product.price.toLocaleString("en-IN")}
         </span>
         {product.compare_price && (
-          <span className="text-xl text-gray-400 font-semibold line-through decoration-gray-300 mb-1">
+          <span className="text-lg md:text-xl text-gray-400 font-semibold line-through decoration-gray-300 mb-1">
             ₹{product.compare_price.toLocaleString("en-IN")}
           </span>
         )}
       </div>
 
+      {/* Mobile Quick Highlights (2x2 Grid) */}
+      <div className="grid grid-cols-2 gap-3 mb-6 lg:hidden">
+        <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-xl border border-gray-100">
+          <Award className="w-5 h-5 text-[#D42B2B]" />
+          <span className="text-xs font-bold text-gray-900 uppercase tracking-tight">Professional Grade</span>
+        </div>
+        <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-xl border border-gray-100">
+          <ShieldCheck className="w-5 h-5 text-[#D42B2B]" />
+          <span className="text-xs font-bold text-gray-900 uppercase tracking-tight">2-Year Warranty</span>
+        </div>
+        <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-xl border border-gray-100">
+          <Zap className="w-5 h-5 text-[#D42B2B]" />
+          <span className="text-xs font-bold text-gray-900 uppercase tracking-tight">Heavy Duty</span>
+        </div>
+        <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-xl border border-gray-100">
+          <Truck className="w-5 h-5 text-[#D42B2B]" />
+          <span className="text-xs font-bold text-gray-900 uppercase tracking-tight">Fast Shipping</span>
+        </div>
+      </div>
+
       {/* Short Description */}
       {product.short_description && (
-        <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+        <p className="hidden lg:block text-lg text-gray-600 mb-8 leading-relaxed">
           {product.short_description}
         </p>
       )}
 
-      {/* Actions (Quantity & Cart) */}
-      <div className="flex flex-col sm:flex-row gap-4 mb-8">
+      {/* Actions (Quantity & Cart) - Desktop Only */}
+      <div className="hidden lg:flex flex-col sm:flex-row gap-4 mb-8">
         {/* Quantity Selector */}
         <div className="flex items-center bg-gray-50 border border-gray-200 rounded-xl h-14 w-full sm:w-36 overflow-hidden">
           <button 
@@ -142,10 +162,25 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             <Truck className="w-5 h-5" />
           </div>
           <div className="text-sm">
-            <p className="font-bold text-gray-900">Free Delivery</p>
-            <p className="text-gray-500">On orders over ₹5,000</p>
+            <p className="font-bold text-gray-900">Fast Delivery</p>
+            <p className="text-gray-500">Dispatch in 24 hrs</p>
           </div>
         </div>
+      </div>
+
+      {/* Sticky Bottom Purchase Bar (Mobile Only) */}
+      <div className="lg:hidden fixed bottom-0 left-0 w-full z-50 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)] border-t border-gray-100 px-4 py-4 flex items-center justify-between gap-4 safe-area-bottom">
+        <div className="flex flex-col">
+          <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Total Price</span>
+          <span className="text-2xl font-black text-gray-900 leading-none">₹{product.price.toLocaleString("en-IN")}</span>
+        </div>
+        <button 
+          disabled={product.stock === 0}
+          className="flex-1 h-[48px] bg-[#D42B2B] text-white font-bold text-[15px] rounded-full flex items-center justify-center gap-2 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed shadow-lg shadow-red-500/20"
+        >
+          <ShoppingCart className="w-4 h-4 fill-current" />
+          {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
+        </button>
       </div>
 
     </div>

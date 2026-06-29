@@ -1,6 +1,6 @@
 import HeroSection from "@/components/landing/HeroSection";
 import CategoriesSlider from "@/components/landing/CategoriesSlider";
-import { FeaturedCollectionsMobile } from "@/components/landing/FeaturedCollectionsMobile";
+import { FeaturedCollections } from "@/components/landing/FeaturedCollections";
 import PromotionalBannerMobile from "@/components/landing/PromotionalBannerMobile";
 import FeaturedProducts from "@/components/products/FeaturedProducts";
 import ValueProp from "@/components/landing/ValueProp";
@@ -89,7 +89,7 @@ export default async function HomePage() {
         <CategoriesSlider categories={categories} />
 
         {/* 3. Featured Collections */}
-        <FeaturedCollectionsMobile />
+        <FeaturedCollections />
 
         {/* 4. Promotional Banner (Full Width Offer) */}
         <PromotionalBannerMobile isAdmin={isAdmin} />

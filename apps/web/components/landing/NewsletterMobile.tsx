@@ -5,58 +5,62 @@ import { ArrowRight, Gift, Bell, Lightbulb } from "lucide-react";
 
 export default function NewsletterMobile() {
   return (
-    <section className="w-full bg-[#D42B2B] px-5 py-8 flex flex-col items-start mt-8">
-      <h2 className="text-white font-black text-[22px] uppercase tracking-tight mb-1">
-        STAY UPDATED
-      </h2>
-      <p className="text-white/90 text-[13px] mb-6 max-w-[280px]">
-        Get the latest updates on new products, offers and expert tips.
-      </p>
+    <section className="w-full bg-[#D42B2B] px-[20px] lg:px-[5%] xl:px-[8%] py-[32px] lg:py-[80px] flex flex-col lg:flex-row lg:items-center lg:justify-between mt-[32px] lg:mt-0">
+      <div className="flex flex-col lg:w-[40%]">
+        <h2 className="text-white font-black text-[22px] lg:text-[40px] uppercase tracking-tight mb-[4px] lg:mb-[16px] font-['var(--font-barlow-condensed)']">
+          STAY UPDATED
+        </h2>
+        <p className="text-white/90 text-[13px] lg:text-[16px] mb-[24px] lg:mb-0 max-w-[280px] lg:max-w-none">
+          Get the latest updates on new products, offers and expert tips.
+        </p>
+      </div>
 
-      {/* Input Form */}
-      <form className="w-full flex items-center bg-[#b82323] rounded-lg overflow-hidden border border-white/10 shadow-inner mb-8" onSubmit={(e) => e.preventDefault()}>
-        <input 
-          type="email" 
-          placeholder="Enter your email" 
-          className="flex-1 bg-transparent text-white placeholder-white/60 px-4 py-3 text-[14px] focus:outline-none"
-        />
-        <button 
-          type="submit" 
-          className="bg-black text-white px-5 py-3 hover:bg-gray-900 transition-colors flex items-center justify-center"
-        >
-          <ArrowRight size={18} />
-        </button>
-      </form>
+      <div className="flex flex-col lg:flex-row lg:w-[60%] lg:items-center lg:justify-end gap-[32px] lg:gap-[64px] w-full">
+        {/* Input Form */}
+        <form className="w-full lg:w-[400px] flex items-center bg-[#b82323] rounded-[4px] overflow-hidden border border-white/10 shadow-inner mb-[32px] lg:mb-0" onSubmit={(e) => e.preventDefault()}>
+          <input 
+            type="email" 
+            placeholder="Enter your email" 
+            className="flex-1 bg-transparent text-white placeholder-white/60 px-[16px] py-[12px] lg:py-[16px] text-[14px] lg:text-[16px] focus:outline-none"
+          />
+          <button 
+            type="submit" 
+            className="bg-black text-white px-[20px] lg:px-[32px] py-[12px] lg:py-[16px] hover:bg-gray-900 transition-colors flex items-center justify-center font-bold"
+          >
+            <ArrowRight size={18} />
+          </button>
+        </form>
 
-      {/* Features List */}
-      <div className="w-full grid grid-cols-3 gap-2 border-t border-white/20 pt-6">
-        <div className="flex flex-col items-center text-center gap-2">
-          <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white bg-white/5">
-            <Gift size={18} />
+        {/* Features List */}
+        <div className="w-full lg:w-auto grid grid-cols-3 lg:flex lg:gap-[32px] gap-[8px] border-t border-white/20 lg:border-none pt-[24px] lg:pt-0">
+          <div className="flex flex-col lg:flex-row items-center text-center lg:text-left gap-[8px] lg:gap-[16px]">
+            <div className="w-[40px] h-[40px] lg:w-[48px] lg:h-[48px] rounded-full border border-white/30 flex items-center justify-center text-white bg-white/5 flex-shrink-0">
+              <Gift size={18} />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-white font-bold text-[10px] lg:text-[12px] uppercase tracking-wide">Exclusive Offers</span>
+              <span className="text-white/70 text-[9px] lg:text-[11px] uppercase tracking-wider">For Subscribers</span>
+            </div>
           </div>
-          <div>
-            <div className="text-white font-bold text-[10px]">Exclusive Offers</div>
-            <div className="text-white/70 text-[9px]">For Subscribers</div>
+          
+          <div className="flex flex-col lg:flex-row items-center text-center lg:text-left gap-[8px] lg:gap-[16px]">
+            <div className="w-[40px] h-[40px] lg:w-[48px] lg:h-[48px] rounded-full border border-white/30 flex items-center justify-center text-white bg-white/5 flex-shrink-0">
+              <Bell size={18} />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-white font-bold text-[10px] lg:text-[12px] uppercase tracking-wide">New Product</span>
+              <span className="text-white/70 text-[9px] lg:text-[11px] uppercase tracking-wider">Notifications</span>
+            </div>
           </div>
-        </div>
-        
-        <div className="flex flex-col items-center text-center gap-2">
-          <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white bg-white/5">
-            <Bell size={18} />
-          </div>
-          <div>
-            <div className="text-white font-bold text-[10px]">New Product</div>
-            <div className="text-white/70 text-[9px]">Notifications</div>
-          </div>
-        </div>
 
-        <div className="flex flex-col items-center text-center gap-2">
-          <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white bg-white/5">
-            <Lightbulb size={18} />
-          </div>
-          <div>
-            <div className="text-white font-bold text-[10px]">Expert Tips</div>
-            <div className="text-white/70 text-[9px]">And Guides</div>
+          <div className="flex flex-col lg:flex-row items-center text-center lg:text-left gap-[8px] lg:gap-[16px]">
+            <div className="w-[40px] h-[40px] lg:w-[48px] lg:h-[48px] rounded-full border border-white/30 flex items-center justify-center text-white bg-white/5 flex-shrink-0">
+              <Lightbulb size={18} />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-white font-bold text-[10px] lg:text-[12px] uppercase tracking-wide">Expert Tips</span>
+              <span className="text-white/70 text-[9px] lg:text-[11px] uppercase tracking-wider">And Guides</span>
+            </div>
           </div>
         </div>
       </div>

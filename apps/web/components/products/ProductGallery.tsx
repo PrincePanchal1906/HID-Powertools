@@ -29,16 +29,16 @@ export default function ProductGallery({ images, thumbnailUrl, productName }: Pr
   const prevImage = () => setCurrentIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
 
   return (
-    <div className="flex flex-col-reverse md:flex-row gap-4 md:gap-6 sticky top-24">
+    <div className="flex flex-col-reverse md:flex-row gap-0 md:gap-6 sticky top-24 -mx-4 md:mx-0 bg-white md:bg-transparent">
       
       {/* Thumbnails Column (Desktop) / Row (Mobile) */}
       {allImages.length > 1 && (
-        <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto max-h-[500px] scrollbar-hide py-1 md:w-24 shrink-0">
+        <div className="hidden md:flex flex-col gap-3 overflow-y-auto max-h-[500px] scrollbar-hide py-1 w-24 shrink-0">
           {allImages.map((img, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`relative w-20 h-20 md:w-24 md:h-24 rounded-xl border-2 overflow-hidden flex-shrink-0 transition-all ${
+              className={`relative w-24 h-24 rounded-xl border-2 overflow-hidden flex-shrink-0 transition-all ${
                 currentIndex === idx ? "border-[#D42B2B] shadow-md" : "border-gray-100 hover:border-gray-300 opacity-60 hover:opacity-100"
               }`}
             >
@@ -54,11 +54,11 @@ export default function ProductGallery({ images, thumbnailUrl, productName }: Pr
         </div>
       )}
 
-      {/* Main Image Area with lightweight CSS zoom */}
-      <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden group">
+      {/* Main Image Area (Edge-to-edge on mobile, CSS zoom on desktop) */}
+      <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square bg-white md:rounded-3xl md:border md:border-gray-100 md:shadow-sm overflow-hidden group">
         
-        {/* CSS Zoom Effect: group-hover triggers scale, cursor changes */}
-        <div className="relative w-full h-full transition-transform duration-500 origin-center group-hover:scale-[1.3] cursor-crosshair">
+        {/* Desktop View: State-based single image with CSS Zoom */}
+        <div className="hidden md:block relative w-full h-full transition-transform duration-500 origin-center group-hover:scale-[1.3] cursor-crosshair">
           <Image
             src={allImages[currentIndex] || "/images/placeholder.png"}
             alt={productName}
@@ -69,9 +69,30 @@ export default function ProductGallery({ images, thumbnailUrl, productName }: Pr
           />
         </div>
 
-        {/* Navigation Arrows if > 1 image */}
+        {/* Mobile View: Native CSS Snap Scroll Gallery */}
+        <div className="md:hidden flex w-full h-full overflow-x-auto snap-x snap-mandatory no-scrollbar" onScroll={(e) => {
+          const scrollLeft = e.currentTarget.scrollLeft;
+          const width = e.currentTarget.clientWidth;
+          const newIndex = Math.round(scrollLeft / width);
+          if (newIndex !== currentIndex) setCurrentIndex(newIndex);
+        }}>
+          {allImages.map((img, idx) => (
+            <div key={idx} className="relative w-full h-full shrink-0 snap-center">
+              <Image
+                src={img || "/images/placeholder.png"}
+                alt={`${productName} image ${idx + 1}`}
+                fill
+                priority={idx === 0}
+                className="object-contain mix-blend-multiply drop-shadow-sm p-8"
+                sizes="100vw"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Navigation Arrows if > 1 image (Desktop Only) */}
         {allImages.length > 1 && (
-          <>
+          <div className="hidden md:block">
             <button 
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
               className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur rounded-full shadow border border-gray-100 flex items-center justify-center text-gray-700 hover:text-[#D42B2B] opacity-0 group-hover:opacity-100 transition-all"
@@ -84,7 +105,20 @@ export default function ProductGallery({ images, thumbnailUrl, productName }: Pr
             >
               <ChevronRight className="w-5 h-5" />
             </button>
-          </>
+          </div>
+        )}
+        {/* Pagination Dots (Mobile Only) */}
+        {allImages.length > 1 && (
+          <div className="absolute bottom-4 left-0 w-full flex justify-center gap-2 md:hidden">
+            {allImages.map((_, idx) => (
+              <div 
+                key={idx} 
+                className={`h-1.5 rounded-full transition-all ${
+                  currentIndex === idx ? "bg-[#D42B2B] w-6" : "bg-gray-300 w-1.5"
+                }`}
+              />
+            ))}
+          </div>
         )}
       </div>
 

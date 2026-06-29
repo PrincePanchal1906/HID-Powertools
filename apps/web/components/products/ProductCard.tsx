@@ -18,24 +18,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <Link href={`/products/${product.slug}`} className="group relative block h-full">
-      <div className="relative flex flex-col h-full bg-white rounded-2xl border border-gray-100 hover:border-[#D42B2B]/50 hover:shadow-xl hover:shadow-[#D42B2B]/5 transition-all duration-300 overflow-hidden">
+      <div className="relative flex flex-col h-full bg-white rounded-xl lg:rounded-2xl border border-gray-100 hover:border-[#D42B2B]/50 hover:shadow-xl hover:shadow-[#D42B2B]/5 transition-all duration-300 overflow-hidden">
         
         {/* Badges Overlay */}
-        <div className="absolute top-3 left-3 z-20 flex flex-col gap-2">
+        <div className="absolute top-2 left-2 lg:top-3 lg:left-3 z-20 flex flex-col gap-1 lg:gap-2">
           {discount > 0 && (
-            <div className="bg-[#D42B2B] text-white text-[10px] font-black tracking-wider px-2 py-1 rounded shadow-sm uppercase">
+            <div className="bg-[#D42B2B] text-white text-[9px] lg:text-[10px] font-black tracking-wider px-1.5 py-0.5 lg:px-2 lg:py-1 rounded-[2px] lg:rounded shadow-sm uppercase">
               {discount}% OFF
             </div>
           )}
           {product.is_new_arrival && (
-            <div className="bg-blue-600 text-white text-[10px] font-black tracking-wider px-2 py-1 rounded shadow-sm uppercase">
+            <div className="bg-blue-600 text-white text-[9px] lg:text-[10px] font-black tracking-wider px-1.5 py-0.5 lg:px-2 lg:py-1 rounded-[2px] lg:rounded shadow-sm uppercase">
               NEW
             </div>
           )}
         </div>
 
         {/* Image Area */}
-        <div className="relative w-full aspect-[4/5] sm:aspect-square flex items-center justify-center p-6 bg-[#f8f9fc] overflow-hidden group-hover:bg-[#fceded]/30 transition-colors duration-500">
+        <div className="relative w-full aspect-[4/5] sm:aspect-square flex items-center justify-center p-4 lg:p-6 bg-[#f8f9fc] overflow-hidden group-hover:bg-[#fceded]/30 transition-colors duration-500">
           <div className="relative z-10 w-full h-full">
             <Image
               src={product.thumbnail_url || "/images/placeholder.png"}
@@ -48,8 +48,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         {/* Content Area */}
-        <div className="p-4 flex flex-col flex-1 relative bg-white border-t border-gray-50">
-          <div className="flex items-center justify-between mb-1">
+        <div className="p-3 lg:p-4 flex flex-col flex-1 relative bg-white border-t border-gray-50">
+          <div className="hidden lg:flex items-center justify-between mb-1">
             <p className="text-xs text-gray-400 font-medium tracking-wide uppercase">
               {product.category?.name || "Tool"}
             </p>
@@ -61,11 +61,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             ) : null}
           </div>
 
-          <h3 className="font-bold text-base text-gray-900 line-clamp-2 leading-snug group-hover:text-[#D42B2B] transition-colors">
+          <h3 className="font-bold text-[13px] lg:text-base text-gray-900 line-clamp-2 leading-tight lg:leading-snug group-hover:text-[#D42B2B] transition-colors mb-2 lg:mb-0">
             {product.name}
           </h3>
 
-          <div className="flex items-center gap-1 mt-2">
+          <div className="hidden lg:flex items-center gap-1 mt-2">
             <div className="flex text-[#FFC107]">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-3 h-3 fill-current" />
@@ -74,16 +74,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <span className="text-[10px] text-gray-400 font-medium ml-1">({reviewCount})</span>
           </div>
 
-          {/* Pricing */}
-          <div className="mt-auto pt-4 flex items-end gap-2">
-            <span className="text-gray-900 font-black text-xl leading-none">
-              ₹{product.price.toLocaleString("en-IN")}
-            </span>
-            {product.compare_price && (
-              <span className="text-gray-400 text-xs font-semibold line-through decoration-gray-300 mb-0.5">
-                ₹{product.compare_price.toLocaleString("en-IN")}
+          {/* Pricing & Mobile CTA */}
+          <div className="mt-auto pt-2 lg:pt-4 flex items-center justify-between lg:items-end lg:justify-start lg:gap-2">
+            <div className="flex flex-col lg:flex-row lg:items-end gap-0.5 lg:gap-2">
+              <span className="text-gray-900 font-black text-[15px] lg:text-xl leading-none">
+                ₹{product.price.toLocaleString("en-IN")}
               </span>
-            )}
+              {product.compare_price && (
+                <span className="text-gray-400 text-[10px] lg:text-xs font-semibold line-through decoration-gray-300 lg:mb-0.5">
+                  ₹{product.compare_price.toLocaleString("en-IN")}
+                </span>
+              )}
+            </div>
+            <div className="lg:hidden text-[10px] font-bold text-[#D42B2B] uppercase tracking-wider bg-red-50 px-2 py-1 rounded">
+              Explore
+            </div>
           </div>
 
           {/* Action Button (Slide Up on Hover on desktop, static on mobile) */}

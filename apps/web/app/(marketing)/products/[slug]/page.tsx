@@ -91,7 +91,7 @@ export default async function ProductDetailsPage({ params }: Props) {
         </div>
 
         {/* Top Section: Gallery (Left) & Info (Right) */}
-        <div className="flex flex-col lg:flex-row gap-12 xl:gap-16 mb-16">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 xl:gap-16 mb-8 lg:mb-16">
           {/* Left Column */}
           <div className="w-full lg:w-1/2 shrink-0">
             <ProductGallery 
