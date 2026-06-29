@@ -32,9 +32,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ initialItems, isAdmin 
     {
       id: "slide-1",
       eyebrow: "/// HEAVY DUTY",
-      titleLine1: "UNLEASH",
-      titleLine2: "POWER",
-      description: "Industrial grade performance for the most demanding construction sites.",
+      titleLine1: "CIRCULAR",
+      titleLine2: "SAW",
+      highlight: "1500W",
+      description: "Precision cutting for woodworking professionals.",
       image: "/images/hero-tool-light.png",
       primaryButton: "View Collection",
       primaryLink: "/products",
@@ -46,16 +47,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ initialItems, isAdmin 
   const slides = initialItems && initialItems.length > 0 
     ? initialItems.map((item, idx) => {
         const words = item.name.split(' ');
-        const mid = Math.ceil(words.length / 2);
-        const line1 = words.length === 1 ? words[0] : words.slice(0, mid).join(' ');
-        const line2 = words.length === 1 ? "" : words.slice(mid).join(' ');
+        const highlight = words.length > 1 ? words.pop() : "";
+        const mainTitle = words.join(' ');
+        
+        const mainWords = mainTitle.split(' ');
+        const mid = Math.ceil(mainWords.length / 2);
+        const line1 = mainWords.length === 1 ? mainWords[0] : mainWords.slice(0, mid).join(' ');
+        const line2 = mainWords.length === 1 ? "" : mainWords.slice(mid).join(' ');
 
         return {
           id: item.id || `slide-${idx}`,
           eyebrow: "/// HEAVY DUTY",
-          titleLine1: line1.toUpperCase(),
-          titleLine2: line2.toUpperCase(),
-          description: item.description || "Industrial grade performance for the most demanding construction sites.",
+          titleLine1: (line1 || "").toUpperCase(),
+          titleLine2: (line2 || "").toUpperCase(),
+          highlight: highlight?.toUpperCase(),
+          description: item.description || "Precision cutting for woodworking professionals.",
           image: item.image,
           primaryButton: "View Collection",
           primaryLink: `/products/${item.slug || ''}`,
@@ -128,9 +134,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ initialItems, isAdmin 
               </div>
 
               {/* Headline */}
-              <h1 className="font-black uppercase font-['var(--font-barlow-condensed)'] text-[52px] sm:text-[68px] leading-[0.85] tracking-tight mb-4">
-                <span className="block text-gray-900">{slide.titleLine1}</span>
-                <span className="block text-[#D42B2B]">{slide.titleLine2}</span>
+              <h1 className="font-black uppercase font-['var(--font-barlow-condensed)'] text-[52px] sm:text-[68px] leading-[0.85] tracking-tight mb-4 text-[#0F172A]">
+                <span className="block">{slide.titleLine1}</span>
+                <span className="block">{slide.titleLine2}</span>
+                {slide.highlight && <span className="block text-[#D42B2B]">{slide.highlight}</span>}
               </h1>
 
               {/* Subtitle */}
