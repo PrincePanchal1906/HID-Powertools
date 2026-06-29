@@ -7,7 +7,7 @@ import ProductFilters from '@/components/products/ProductFilters'
 import ProductSort from '@/components/products/ProductSort'
 import { SearchBar } from '@/components/products/SearchBar'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
-import { Filter } from 'lucide-react'
+// import removed
 import { MobilePLPWrapper } from '@/components/products/MobilePLPWrapper'
 
 export const metadata: Metadata = {
@@ -56,16 +56,16 @@ export default async function ProductsPage({
       {/* Mobile Sticky Header and Bottom Sheet Manager */}
       <MobilePLPWrapper 
         categories={categories}
-        currentCategory={category}
-        initialQuery={q}
+        {...(category !== undefined ? { currentCategory: category } : {})}
+        {...(q !== undefined ? { initialQuery: q } : {})}
         currentSort={sort}
         currentFilters={{ 
           inStock, 
           isFeatured, 
           isNewArrival, 
           isBestseller, 
-          minPrice, 
-          maxPrice 
+          ...(minPrice !== undefined && { minPrice }),
+          ...(maxPrice !== undefined && { maxPrice })
         }}
       />
 

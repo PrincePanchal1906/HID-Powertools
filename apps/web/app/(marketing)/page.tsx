@@ -15,7 +15,7 @@ import { VisualCMSProvider } from "@/components/admin/visual/VisualCMSProvider";
 export default async function HomePage() {
   const supabase = await createClient();
 
-  const [userRes, heroRes, offersRes, categories] = await Promise.all([
+  const [userRes, heroRes, categories] = await Promise.all([
     supabase.auth.getUser(),
     supabase
       .from('homepage_product_sections')
@@ -34,23 +34,6 @@ export default async function HomePage() {
         )
       `)
       .eq('section_key', 'hero')
-      .order('display_order', { ascending: true }),
-    supabase
-      .from('homepage_product_sections')
-      .select(`
-        product_id,
-        display_order,
-        products (
-          id,
-          name,
-          slug,
-          thumbnail_url,
-          price,
-          compare_price,
-          categories ( name )
-        )
-      `)
-      .eq('section_key', 'offers')
       .order('display_order', { ascending: true }),
     getCategories()
   ]);

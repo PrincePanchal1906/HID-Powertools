@@ -33,8 +33,8 @@ export function MobilePLPWrapper({
     <>
       <MobilePLPHeader 
         categories={categories}
-        currentCategory={currentCategory}
-        initialQuery={initialQuery}
+        {...(currentCategory !== undefined ? { currentCategory } : {})}
+        {...(initialQuery !== undefined ? { initialQuery } : {})}
         currentFilters={currentFilters}
         onOpenFilters={() => setIsFilterSheetOpen(true)}
       />
@@ -43,7 +43,7 @@ export function MobilePLPWrapper({
         isOpen={isFilterSheetOpen}
         onClose={() => setIsFilterSheetOpen(false)}
         categories={categories}
-        currentCategory={currentCategory}
+        {...(currentCategory !== undefined ? { currentCategory } : {})}
         currentSort={currentSort}
         currentFilters={currentFilters}
       />

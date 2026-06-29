@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { getListProducts } from '@/actions/admin/productLists'
-import { ArrowRight } from 'lucide-react'
+// import removed
 import dynamic from 'next/dynamic'
 
 const AdminSectionWrapper = dynamic(() => import('../admin/visual/AdminSectionWrapper').then(m => m.AdminSectionWrapper), { ssr: false })

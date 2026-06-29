@@ -92,7 +92,7 @@ export function MobileFiltersBottomSheet({
           <div className="[&>div]:border-none [&>div]:shadow-none [&>div]:p-0 [&>div]:static">
             <ProductFilters 
               categories={categories}
-              currentCategory={currentCategory}
+              {...(currentCategory !== undefined ? { currentCategory } : {})}
               currentFilters={currentFilters}
             />
           </div>

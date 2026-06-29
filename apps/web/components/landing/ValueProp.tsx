@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+// import removed
 import { valuePropContent } from "../../lib/data/valuePropData";
 import type { PainPoint } from "@hid/types";
 
@@ -59,19 +59,7 @@ export const ValueProp: React.FC<ValuePropProps> = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const renderHeadline = (text: string) => {
-    const parts = text.split("Quit");
-    if (parts.length > 1) {
-      return (
-        <>
-          {parts[0]}
-          <span className="text-primary underline decoration-primary underline-offset-4">Quit</span>
-          {parts[1]}
-        </>
-      );
-    }
-    return text;
-  };
+
 
   return (
     <section id="why-hid" className="w-full border-t border-gray-100 lg:border-none" ref={ref}>
