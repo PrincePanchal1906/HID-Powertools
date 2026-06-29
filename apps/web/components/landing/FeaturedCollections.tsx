@@ -5,55 +5,102 @@ import Image from "next/image";
 export const FeaturedCollections = () => {
   const collections = [
     { 
-      title: "Heavy Duty Drills", 
-      subtitle: "Power through any material",
+      title: "DRILL COLLECTION",
       image: "/images/hero-tool-light.png", 
-      link: "/categories" 
+      link: "/products?category=drills",
+      theme: "light",
+      size: "large"
     },
     { 
-      title: "Grinders & Saws", 
-      subtitle: "Precision cutting tools",
-      image: "/images/grinder-transparent.png", 
-      link: "/categories" 
+      title: "ANGLE GRINDER COLLECTION", 
+      image: "/images/hero-grinder.png", 
+      link: "/products?category=grinders",
+      theme: "dark",
+      size: "small"
+    },
+    { 
+      title: "ROTARY HAMMER COLLECTION", 
+      image: "/images/hero-hammer-light.png", 
+      link: "/products?category=hammers",
+      theme: "light",
+      size: "small"
+    },
+    { 
+      title: "PROFESSIONAL SERIES", 
+      subtitle: "BUILT TO OUTLAST.",
+      image: "/images/hero-tool.png", 
+      link: "/products?category=professional",
+      theme: "dark",
+      size: "large"
     },
   ];
 
   return (
-    <section className="w-full bg-white lg:py-[120px] lg:px-[5%] xl:px-[8%] max-w-[1920px] mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-[32px]">
-        {collections.map((item, idx) => (
-          <Link 
-            key={idx} 
-            href={item.link}
-            className="relative w-full h-[220px] lg:h-[450px] bg-[#f4f5f7] lg:rounded-[4px] overflow-hidden group border-b border-gray-100 lg:border-none block"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/60 to-transparent z-10 transition-opacity group-hover:from-gray-900/95" />
-            
-            <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[70%] h-[120%] lg:w-[80%] lg:right-[-5%] lg:scale-[1.05] z-0 pointer-events-none opacity-80 mix-blend-multiply transition-transform duration-700 group-hover:scale-[1.1]">
-              <div className="relative w-full h-full">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-contain lg:object-right"
-                />
-              </div>
-            </div>
+    <section className="w-full bg-white lg:py-24">
+      {/* Container removing px constraints on mobile for full bleed, keeping it on desktop */}
+      <div className="w-full max-w-[1920px] mx-auto px-0 lg:px-[5%] xl:px-[8%]">
+        
+        {/* Magazine Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-[24px] xl:gap-[32px]">
+          
+          {collections.map((item, idx) => {
+            const isLight = item.theme === "light";
+            const isLarge = item.size === "large";
 
-            <div className="absolute inset-0 p-[24px] lg:p-[56px] flex flex-col justify-center z-20 w-[75%] lg:w-[65%]">
-              <div className="flex items-center gap-[16px] mb-[8px] lg:mb-[16px]">
-                <span className="text-[10px] lg:text-[12px] font-black text-[#D42B2B] tracking-widest uppercase bg-black/40 px-[8px] py-[4px] rounded-[4px]">
-                  /// EQUIPMENT
-                </span>
-              </div>
-              <h3 className="text-[28px] lg:text-[48px] font-black text-white leading-[1.05] uppercase mb-[8px] lg:mb-[16px] font-['var(--font-barlow-condensed)'] tracking-tight">{item.title}</h3>
-              <p className="text-[15px] lg:text-[18px] text-gray-300 mb-[16px] lg:mb-[32px] leading-tight font-medium">{item.subtitle}</p>
-              <span className="text-[11px] lg:text-[14px] font-bold text-[#D42B2B] uppercase tracking-widest w-fit hover:text-white transition-colors flex items-center gap-2">
-                View Loadout <span className="text-[16px]">&rarr;</span>
-              </span>
-            </div>
-          </Link>
-        ))}
+            return (
+              <Link 
+                key={idx} 
+                href={item.link}
+                className={`
+                  relative block overflow-hidden group 
+                  transition-transform duration-500 ease-out 
+                  lg:hover:-translate-y-1 lg:hover:scale-[1.02]
+                  ${isLarge ? "col-span-1 lg:col-span-2" : "col-span-1"}
+                  ${isLight ? "bg-[#f4f5f7] text-gray-900" : "bg-[#0D0D0D] text-white"}
+                  ${isLarge ? "h-[350px] sm:h-[450px] lg:h-[550px]" : "h-[350px] sm:h-[450px]"}
+                `}
+              >
+                
+                {/* Content */}
+                <div className="absolute inset-0 p-[32px] sm:p-[48px] lg:p-[64px] flex flex-col justify-center z-20 w-full sm:w-[60%] lg:w-[50%]">
+                  <h3 className="text-[40px] sm:text-[48px] lg:text-[64px] font-black leading-[0.9] uppercase font-['var(--font-barlow-condensed)'] tracking-tight mb-[16px]">
+                    {item.title}
+                  </h3>
+                  
+                  {item.subtitle && (
+                    <p className={`text-[16px] lg:text-[20px] font-bold tracking-widest uppercase mb-[24px] ${isLight ? "text-gray-600" : "text-gray-400"}`}>
+                      {item.subtitle}
+                    </p>
+                  )}
+
+                  <span className={`text-[14px] lg:text-[16px] font-bold uppercase tracking-widest flex items-center gap-2 mt-4 lg:mt-8 transition-colors ${isLight ? "text-gray-900 group-hover:text-[#D42B2B]" : "text-white group-hover:text-[#D42B2B]"}`}>
+                    View Collection <span className="text-[18px]">&rarr;</span>
+                  </span>
+                </div>
+
+                {/* Product Image */}
+                <div className={`
+                  absolute top-1/2 -translate-y-1/2 pointer-events-none z-10
+                  ${isLarge 
+                    ? "right-[-15%] sm:right-0 w-[80%] sm:w-[55%] lg:w-[50%] h-[120%] sm:h-[130%]" 
+                    : "right-[-25%] sm:right-[-10%] w-[90%] sm:w-[80%] h-[120%]"}
+                `}>
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className={`object-contain ${isLarge ? "lg:object-right" : "lg:object-center"} drop-shadow-2xl mix-blend-normal`}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </div>
+                </div>
+
+              </Link>
+            )
+          })}
+
+        </div>
       </div>
     </section>
   );

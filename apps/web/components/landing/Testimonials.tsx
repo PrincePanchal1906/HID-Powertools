@@ -2,7 +2,7 @@ import React from "react";
 
 export const Testimonials = () => {
   return (
-    <section className="w-full bg-[#f4f5f7] px-[16px] py-[40px] lg:py-[120px] lg:px-[5%] xl:px-[8%]">
+    <section className="w-full bg-[#f4f5f7] px-[16px] py-[80px] lg:pt-[240px] lg:pb-[160px] lg:px-[5%] xl:px-[8%]">
       <div className="flex flex-col mb-[24px] lg:mb-[64px] lg:items-center">
         <div className="flex items-center gap-[16px] mb-[8px] lg:mb-[16px]">
           <span className="text-[11px] lg:text-[14px] font-black text-[#D42B2B] tracking-widest uppercase bg-red-50 px-[8px] lg:px-[16px] py-[4px] lg:py-[6px] rounded-[4px]">
