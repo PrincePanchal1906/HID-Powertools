@@ -1,0 +1,15 @@
+{
+  "name": "@hid/types",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "devDependencies": {
+    "@hid/config":  "workspace:*",
+    "typescript":   "^5.4.0"
+  },
+  "type": "module"
+}

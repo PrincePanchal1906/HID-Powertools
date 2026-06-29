@@ -1,0 +1,14 @@
+{
+  "name": "@hid/config",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    "./tsconfig/*": "./tsconfig/*.json",
+    "./tailwind": "./tailwind/index.ts",
+    "./eslint": "./eslint/index.js"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "type": "module"
+}

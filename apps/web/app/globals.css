@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-surface-alt);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 3px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes marquee-ribbon {
+  from { transform: translateX(0) }
+  to   { transform: translateX(-50%) }
+}
+.animate-marquee-ribbon {
+  animation: marquee-ribbon 30s linear infinite;
+}
+.animate-marquee-ribbon:hover {
+  animation-play-state: paused;
+}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

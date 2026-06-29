@@ -1,0 +1,18 @@
+{
+  "extends": "../../packages/config/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*":        ["./*"],
+      "@hid/ui":    ["../../packages/ui/src"],
+      "@hid/types": ["../../packages/types/index.ts"]
+    },
+    "esModuleInterop": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}

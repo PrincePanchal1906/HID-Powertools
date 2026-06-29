@@ -1,0 +1,102 @@
+import type { Testimonial, CaseStudy, ReviewPlatform } from '@hid/types';
+
+export const testimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: 'Rajesh Mehta',
+    role: 'Senior Site Contractor',
+    company: 'Mehta Construction Pvt Ltd',
+    avatar: '/images/avatars/rajesh.png',
+    rating: 5,
+    quote: 'I have been in construction for 22 years and gone through every major brand. HID PowerTools is the first time I have not had a single tool failure mid-project. The battery life alone saves us 2 hours every single day.',
+    tool: 'HID Pro Drill X9 + UltraCell Battery',
+    verified: true,
+  },
+  {
+    id: 2,
+    name: 'Priya Nair',
+    role: 'Interior Fit-out Specialist',
+    company: 'Nair Interiors, Bangalore',
+    avatar: '/images/avatars/priya.png',
+    rating: 5,
+    quote: 'As a woman on construction sites I need tools that are powerful but not exhausting to use all day. The HID compact series is perfectly balanced and has never let me down across 15 projects this year.',
+    tool: 'HID Compact Series',
+    verified: true,
+  },
+  {
+    id: 3,
+    name: 'Suresh Patel',
+    role: 'Electrical Contractor',
+    company: 'SP Electricals, Ahmedabad',
+    avatar: '/images/avatars/suresh.png',
+    rating: 5,
+    quote: 'Same-day delivery is not a gimmick — I ordered at 11AM and had tools on site by 3PM. That kind of reliability is what keeps a project on schedule. Will never go back to another brand.',
+    tool: 'HID Impact Driver Pro',
+    verified: true,
+  },
+  {
+    id: 4,
+    name: 'Amit Sharma',
+    role: 'Civil Engineer',
+    company: 'Sharma Builders, Delhi',
+    avatar: '/images/avatars/amit.png',
+    rating: 5,
+    quote: 'The IP67 rating is not just marketing. Our tools went through monsoon season on an open site — not a single issue. Worth every rupee.',
+    tool: 'HID Heavy Duty Grinder HD7',
+    verified: true,
+  },
+  {
+    id: 5,
+    name: 'Kavya Reddy',
+    role: 'Renovation Contractor',
+    company: 'Reddy Renovations, Hyderabad',
+    avatar: '/images/avatars/kavya.png',
+    rating: 5,
+    quote: 'Switched from a big-name brand after getting burned on warranty three times. HID resolved my service request in 4 hours. Customer support alone makes them worth choosing.',
+    tool: 'HID Circular Saw C12',
+    verified: true,
+  },
+  {
+    id: 6,
+    name: 'Mohammed Iqbal',
+    role: 'Plumbing Contractor',
+    company: 'Iqbal Plumbing Works, Chennai',
+    avatar: '/images/avatars/iqbal.png',
+    rating: 5,
+    quote: 'The universal battery system changed how we operate. One charger, one battery for 6 different tools. Our van is half as cluttered and productivity is up 30 percent.',
+    tool: 'HID Universal Battery Platform',
+    verified: true,
+  },
+];
+
+export const caseStudies: CaseStudy[] = [
+  {
+    id: 1,
+    title: 'Mehta Construction — Mumbai High-Rise Project',
+    metric: '40%',
+    metricLabel: 'faster project completion',
+    before: 'Constant tool failures causing 2-3 hour daily delays across a 200-person site. Battery replacements costing ₹80,000/month.',
+    after: 'Zero tool failures across 8 months. Battery costs down to ₹22,000/month. Project delivered 3 weeks ahead of schedule.',
+    name: 'Rajesh Mehta',
+    role: 'Project Director',
+    avatar: '/images/avatars/rajesh.png',
+  },
+  {
+    id: 2,
+    title: 'SP Electricals — Commercial Complex Wiring',
+    metric: '₹1.2L',
+    metricLabel: 'saved in tool replacement costs',
+    before: 'Replacing 4-6 impact drivers per quarter due to poor build quality. Average tool lifespan under 4 months.',
+    after: 'Running the same HID tools for 14 months with zero failures. Maintenance cost reduced by 85%.',
+    name: 'Suresh Patel',
+    role: 'Lead Electrician',
+    avatar: '/images/avatars/suresh.png',
+  },
+];
+
+export const reviewPlatforms: ReviewPlatform[] = [
+  { name: 'Google Reviews', rating: '4.9', count: '2,400+ reviews', icon: 'Star' },
+  { name: 'Trustpilot',     rating: '4.8', count: '1,800+ reviews', icon: 'Star' },
+  { name: 'Amazon India',   rating: '4.7', count: '5,200+ ratings', icon: 'Star' },
+];
+// ✅ FILE COMPLETE
