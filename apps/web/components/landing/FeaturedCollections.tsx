@@ -57,24 +57,24 @@ export const FeaturedCollections = () => {
                   lg:hover:-translate-y-1 lg:hover:scale-[1.02]
                   ${isLarge ? "col-span-1 lg:col-span-2" : "col-span-1"}
                   ${isLight ? "bg-[#f4f5f7] text-gray-900" : "bg-[#0D0D0D] text-white"}
-                  ${isLarge ? "h-[350px] sm:h-[450px] lg:h-[550px]" : "h-[350px] sm:h-[450px]"}
+                  ${isLarge ? "h-[220px] sm:h-[350px] lg:h-[550px]" : "h-[200px] sm:h-[350px] lg:h-[550px]"}
                 `}
               >
                 
                 {/* Content */}
-                <div className="absolute inset-0 p-[32px] sm:p-[48px] lg:p-[64px] flex flex-col justify-center z-20 w-full sm:w-[60%] lg:w-[50%]">
-                  <h3 className="text-[40px] sm:text-[48px] lg:text-[64px] font-black leading-[0.9] uppercase font-['var(--font-barlow-condensed)'] tracking-tight mb-[16px]">
+                <div className="absolute inset-0 p-[16px] sm:p-[48px] lg:p-[64px] flex flex-col justify-center z-20 w-[65%] sm:w-[60%] lg:w-[50%]">
+                  <h3 className="text-[28px] sm:text-[48px] lg:text-[64px] font-black leading-[0.9] uppercase font-['var(--font-barlow-condensed)'] tracking-tight mb-[12px] lg:mb-[16px]">
                     {item.title}
                   </h3>
                   
                   {item.subtitle && (
-                    <p className={`text-[16px] lg:text-[20px] font-bold tracking-widest uppercase mb-[24px] ${isLight ? "text-gray-600" : "text-gray-400"}`}>
+                    <p className={`text-[12px] lg:text-[20px] font-bold tracking-widest uppercase mb-[16px] lg:mb-[24px] ${isLight ? "text-gray-600" : "text-gray-400"}`}>
                       {item.subtitle}
                     </p>
                   )}
 
-                  <span className={`text-[14px] lg:text-[16px] font-bold uppercase tracking-widest flex items-center gap-2 mt-4 lg:mt-8 transition-colors ${isLight ? "text-gray-900 group-hover:text-[#D42B2B]" : "text-white group-hover:text-[#D42B2B]"}`}>
-                    View Collection <span className="text-[18px]">&rarr;</span>
+                  <span className={`text-[12px] lg:text-[16px] font-bold uppercase tracking-widest flex items-center gap-2 mt-2 lg:mt-8 transition-colors ${isLight ? "text-gray-900 group-hover:text-[#D42B2B]" : "text-white group-hover:text-[#D42B2B]"}`}>
+                    View Collection <span className="text-[14px] lg:text-[18px]">&rarr;</span>
                   </span>
                 </div>
 

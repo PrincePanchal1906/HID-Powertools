@@ -28,40 +28,37 @@ export const ValueProp: React.FC = () => {
   ];
 
   return (
-    <section 
-      id="why-hid" 
-      className="w-full bg-[#0D0D0D] py-[40px] lg:py-[64px] border-y border-white/5"
-    >
-      <div className="max-w-[1920px] mx-auto px-[16px] lg:px-[5%] xl:px-[8%]">
+    <section className="w-full bg-[#0D0D0D] py-[32px] lg:py-[120px] relative overflow-hidden">
+      <div className="relative z-20 max-w-[1920px] mx-auto px-[16px] lg:px-[5%] xl:px-[8%]">
         
         {/* Header Content */}
-        <div className="flex flex-col mb-[32px] lg:mb-[48px] items-center text-center">
-          <div className="flex items-center gap-[16px] mb-[12px]">
-            <span className="text-[11px] font-black text-[#D42B2B] tracking-widest uppercase bg-white/5 border border-white/10 px-[12px] py-[6px] rounded-[4px]">
+        <div className="flex flex-col mb-[16px] lg:mb-[48px] items-center text-center">
+          <div className="flex items-center gap-[16px] mb-[16px]">
+            <span className="text-[12px] font-black text-[#D42B2B] tracking-widest uppercase bg-white/5 border border-white/10 px-[12px] py-[6px] rounded-[4px]">
               /// THE HID DIFFERENCE
             </span>
           </div>
-          <h2 className="text-[32px] lg:text-[48px] font-black text-white leading-tight uppercase font-['var(--font-barlow-condensed)'] tracking-tight">
+          <h2 className="text-[28px] lg:text-[48px] font-black text-white leading-tight uppercase font-['var(--font-barlow-condensed)'] tracking-tight">
             WHY CHOOSE <span className="text-[#D42B2B]">HID</span>
           </h2>
         </div>
 
         {/* 2x2 Mobile / 4-Col Desktop Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-[24px] lg:gap-[48px]">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-[12px] lg:gap-[48px]">
           {benefits.map((benefit, idx) => (
             <div 
               key={idx} 
               className="flex flex-col items-start lg:items-center lg:text-center gap-[12px]"
             >
-              <div className="w-[40px] h-[40px] lg:w-[48px] lg:h-[48px] rounded-[4px] bg-white/5 border border-white/10 flex items-center justify-center text-[#D42B2B] shrink-0">
+              <div className="w-[32px] h-[32px] lg:w-[48px] lg:h-[48px] rounded-[4px] bg-white/5 border border-white/10 flex items-center justify-center text-[#D42B2B] shrink-0">
                 {benefit.icon}
               </div>
               
-              <div className="flex flex-col gap-[4px]">
-                <h3 className="text-white font-bold text-[15px] lg:text-[18px] uppercase tracking-wide font-['var(--font-barlow-condensed)']">
+              <div className="flex flex-col gap-[8px]">
+                <h3 className="text-white font-bold text-[16px] lg:text-[18px] uppercase tracking-wide font-['var(--font-barlow-condensed)']">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-400 text-[12px] lg:text-[14px] leading-relaxed">
+                <p className="text-gray-400 text-[14px] lg:text-[14px] leading-relaxed">
                   {benefit.desc}
                 </p>
               </div>

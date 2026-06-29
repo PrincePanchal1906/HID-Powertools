@@ -5,12 +5,12 @@ import { ArrowRight, Gift, Bell, Lightbulb } from "lucide-react";
 
 export default function NewsletterMobile() {
   return (
-    <section className="w-full bg-[#D42B2B] px-[20px] lg:px-[5%] xl:px-[8%] py-[32px] lg:py-[80px] flex flex-col lg:flex-row lg:items-center lg:justify-between mt-[32px] lg:mt-0">
+    <section className="w-full bg-[#D42B2B] px-[20px] lg:px-[5%] xl:px-[8%] py-[16px] lg:py-[80px] flex flex-col lg:flex-row lg:items-center lg:justify-between mt-[24px] lg:mt-0">
       <div className="flex flex-col lg:w-[40%]">
-        <h2 className="text-white font-black text-[22px] lg:text-[40px] uppercase tracking-tight mb-[4px] lg:mb-[16px] font-['var(--font-barlow-condensed)']">
+        <h2 className="text-white font-black text-[22px] lg:text-[40px] uppercase tracking-tight mb-0 lg:mb-[16px] font-['var(--font-barlow-condensed)']">
           STAY UPDATED
         </h2>
-        <p className="text-white/90 text-[13px] lg:text-[16px] mb-[24px] lg:mb-0 max-w-[280px] lg:max-w-none">
+        <p className="text-white/90 text-[13px] lg:text-[16px] mb-[16px] lg:mb-0 max-w-[280px] lg:max-w-none">
           Get the latest updates on new products, offers and expert tips.
         </p>
       </div>
@@ -32,7 +32,7 @@ export default function NewsletterMobile() {
         </form>
 
         {/* Features List */}
-        <div className="w-full lg:w-auto grid grid-cols-3 lg:flex lg:gap-[32px] gap-[8px] border-t border-white/20 lg:border-none pt-[24px] lg:pt-0">
+        <div className="hidden lg:flex w-full lg:w-auto gap-[32px] pt-0">
           <div className="flex flex-col lg:flex-row items-center text-center lg:text-left gap-[8px] lg:gap-[16px]">
             <div className="w-[40px] h-[40px] lg:w-[48px] lg:h-[48px] rounded-full border border-white/30 flex items-center justify-center text-white bg-white/5 flex-shrink-0">
               <Gift size={18} />

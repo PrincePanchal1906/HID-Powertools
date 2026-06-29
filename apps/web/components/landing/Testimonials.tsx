@@ -2,10 +2,10 @@ import React from "react";
 
 export const Testimonials = () => {
   return (
-    <section className="w-full bg-[#f4f5f7] px-[16px] py-[80px] lg:pt-[240px] lg:pb-[160px] lg:px-[5%] xl:px-[8%]">
+    <section className="w-full bg-[#f4f5f7] px-[16px] py-[24px] lg:pt-[240px] lg:pb-[160px] lg:px-[5%] xl:px-[8%]">
       <div className="flex flex-col mb-[24px] lg:mb-[64px] lg:items-center">
-        <div className="flex items-center gap-[16px] mb-[8px] lg:mb-[16px]">
-          <span className="text-[11px] lg:text-[14px] font-black text-[#D42B2B] tracking-widest uppercase bg-red-50 px-[8px] lg:px-[16px] py-[4px] lg:py-[6px] rounded-[4px]">
+        <div className="flex items-center gap-[16px] mb-[16px] lg:mb-[16px]">
+          <span className="text-[12px] lg:text-[14px] font-black text-[#D42B2B] tracking-widest uppercase bg-red-50 px-[8px] lg:px-[16px] py-[4px] lg:py-[6px] rounded-[4px]">
             /// FIELD VERIFIED
           </span>
         </div>
@@ -14,7 +14,7 @@ export const Testimonials = () => {
         </h2>
       </div>
 
-      <div className="bg-white rounded-[4px] p-[24px] lg:p-[80px] shadow-sm border border-gray-100 flex flex-col lg:items-center lg:text-center relative overflow-hidden max-w-[1200px] mx-auto group hover:border-[#D42B2B] transition-colors">
+      <div className="bg-white rounded-[4px] p-[16px] lg:p-[80px] shadow-sm border border-gray-100 flex flex-col lg:items-center lg:text-center relative overflow-hidden max-w-[1200px] mx-auto group hover:border-[#D42B2B] transition-colors">
         
         {/* Quote Icon Background */}
         <div className="absolute top-[-10px] right-2 lg:top-[-40px] lg:left-1/2 lg:-translate-x-1/2 text-[#D42B2B] opacity-5 font-serif text-[120px] lg:text-[300px] leading-none select-none pointer-events-none">
@@ -38,8 +38,8 @@ export const Testimonials = () => {
             />
           </div>
           <div className="flex flex-col lg:items-center">
-            <h4 className="text-[15px] lg:text-[20px] font-black text-gray-900 uppercase">Mark Thompson</h4>
-            <span className="text-[11px] lg:text-[14px] text-gray-500 font-bold uppercase tracking-wide">Lead Site Contractor</span>
+            <h4 className="text-[16px] lg:text-[20px] font-black text-gray-900 uppercase">Mark Thompson</h4>
+            <span className="text-[12px] lg:text-[14px] text-gray-500 font-bold uppercase tracking-wide">Lead Site Contractor</span>
           </div>
         </div>
       </div>

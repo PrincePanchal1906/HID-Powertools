@@ -76,7 +76,6 @@ const iconMap: Record<string, React.FC<any>> = {
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [expandedCol, setExpandedCol] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -93,10 +92,6 @@ export const Footer: React.FC = () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
-
-  const handleColToggle = (id: string): void => {
-    setExpandedCol((prev) => (prev === id ? null : id));
-  };
 
   const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -115,18 +110,18 @@ export const Footer: React.FC = () => {
   return (
     <footer role="contentinfo" className="overflow-hidden">
       {/* PART A — Newsletter Bar */}
-      <div className="bg-white md:bg-[#D42B2B] py-8 md:py-12 px-4 md:px-16">
-        <div className="max-w-7xl mx-auto bg-[#D42B2B] rounded-[24px] md:rounded-none p-8 md:p-0 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8 shadow-2xl md:shadow-none shadow-red-500/30">
+      <div className="bg-white md:bg-[#D42B2B] py-6 md:py-12 px-4 md:px-16">
+        <div className="max-w-7xl mx-auto bg-[#D42B2B] rounded-[20px] md:rounded-none p-5 md:p-0 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8 shadow-xl md:shadow-none shadow-red-500/20">
           <div className="text-center md:text-left">
-            <h3 className="font-black text-white text-[24px] md:text-3xl leading-tight tracking-tight">
+            <h3 className="font-black text-white text-[20px] md:text-3xl leading-tight tracking-tight">
               Get Deals, Tips & New Arrivals First.
             </h3>
-            <p className="text-white/90 text-[13px] md:text-sm mt-2 font-medium">
+            <p className="text-white/90 text-[12px] md:text-sm mt-1.5 font-medium leading-relaxed">
               Join 12,000+ contractors who get our weekly tool drop. No spam.
             </p>
           </div>
 
-          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 w-full md:w-auto mt-2 md:mt-0">
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-2.5 w-full md:w-auto mt-2 md:mt-0">
             <div className="flex flex-col flex-1 relative w-full">
               <input
                 type="email"
@@ -135,7 +130,7 @@ export const Footer: React.FC = () => {
                 placeholder="your@email.com"
                 required
                 disabled={status === "loading" || status === "success"}
-                className="w-full md:w-72 px-5 py-4 md:py-3 rounded-[14px] text-base md:text-sm bg-white/10 border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:border-white focus:bg-white/20 transition duration-200"
+                className="w-full md:w-72 px-4 py-3 rounded-[10px] text-[14px] bg-white/10 border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:border-white focus:bg-white/20 transition duration-200"
               />
               {status === "success" && (
                 <motion.p
@@ -150,7 +145,7 @@ export const Footer: React.FC = () => {
             <button
               type="submit"
               disabled={status === "loading" || status === "success"}
-              className={`px-6 py-4 md:py-3.5 rounded-[14px] font-black text-base md:text-sm whitespace-nowrap transition duration-200 flex items-center justify-center gap-2 w-full sm:w-auto active:scale-95 ${
+              className={`px-5 py-3 rounded-[10px] font-black text-[14px] whitespace-nowrap transition duration-200 flex items-center justify-center gap-2 w-full sm:w-auto active:scale-95 ${
                 status === "success"
                   ? "bg-green-500 text-white"
                   : "bg-gray-900 text-white hover:bg-black"
@@ -158,17 +153,17 @@ export const Footer: React.FC = () => {
             >
               {status === "idle" && (
                 <>
-                  Subscribe <Send size={18} className="ml-1" />
+                  Subscribe <Send size={16} className="ml-1" />
                 </>
               )}
               {status === "loading" && (
                 <>
-                  <Loader2 className="animate-spin" size={16} /> Sending...
+                  <Loader2 className="animate-spin" size={14} /> Sending...
                 </>
               )}
               {status === "success" && (
                 <>
-                  <CheckCircle size={16} /> Subscribed!
+                  <CheckCircle size={14} /> Subscribed!
                 </>
               )}
               {status === "error" && "Try Again"}
@@ -178,35 +173,35 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* PART B — Main Footer Body */}
-      <div className="bg-gray-900 pt-10 md:pt-16 pb-8 px-4 md:px-16">
+      <div className="bg-gray-900 pt-8 md:pt-16 pb-6 md:pb-8 px-4 md:px-16">
         <div className="max-w-7xl mx-auto">
           {/* TOP ROW */}
-          <div className="flex flex-col lg:flex-row gap-12 pb-12 border-b border-white/10">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 pb-8 md:pb-12 border-b border-white/10">
             {/* LEFT BLOCK */}
             <div className="lg:w-1/3">
               <div>
-                <span className="font-black text-2xl text-white tracking-tight">
+                <span className="font-black text-xl md:text-2xl text-white tracking-tight">
                   HID
                 </span>
-                <span className="font-light text-white/70 tracking-tight ml-1">
+                <span className="font-light text-white/70 tracking-tight ml-1 text-sm md:text-base">
                   PowerTools
                 </span>
               </div>
-              <p className="text-white/50 text-sm mt-3 leading-relaxed max-w-xs">
+              <p className="text-white/50 text-xs md:text-sm mt-2 md:mt-3 leading-relaxed max-w-xs">
                 {footerTagline}
               </p>
 
-              <div className="mt-8 space-y-4">
+              <div className="mt-6 md:mt-8 space-y-3 md:space-y-4">
                 {contactDetails.map((detail: ContactDetail) => {
                   const Icon = iconMap[detail.icon];
                   const inner = (
                     <>
-                      {Icon && <Icon className="text-primary flex-shrink-0 mt-0.5" size={16} />}
+                      {Icon && <Icon className="text-primary flex-shrink-0 mt-0.5" size={14} />}
                       <div>
-                        <span className="text-white/40 text-xs font-medium block">
+                        <span className="text-white/40 text-[10px] md:text-xs font-medium block">
                           {detail.label}
                         </span>
-                        <span className="text-white/80 text-sm">
+                        <span className="text-white/80 text-xs md:text-sm">
                           {detail.value}
                         </span>
                       </div>
@@ -216,23 +211,23 @@ export const Footer: React.FC = () => {
                     <a
                       key={detail.label}
                       href={detail.href}
-                      className="flex items-start gap-3 hover:text-primary transition-colors duration-200"
+                      className="flex items-start gap-2.5 md:gap-3 hover:text-primary transition-colors duration-200"
                     >
                       {inner}
                     </a>
                   ) : (
-                    <div key={detail.label} className="flex items-start gap-3">
+                    <div key={detail.label} className="flex items-start gap-2.5 md:gap-3">
                       {inner}
                     </div>
                   );
                 })}
               </div>
 
-              <div className="mt-8">
-                <h4 className="text-white/40 text-xs font-semibold tracking-widest uppercase mb-4">
+              <div className="mt-6 md:mt-8">
+                <h4 className="text-white/40 text-[10px] md:text-xs font-semibold tracking-widest uppercase mb-3 md:mb-4">
                   FOLLOW US
                 </h4>
-                <div className="flex flex-row gap-3 flex-wrap">
+                <div className="flex flex-row gap-2 md:gap-3 flex-wrap">
                   {socialLinks.map((link: SocialLink) => {
                     const Icon = iconMap[link.icon];
                     return (
@@ -242,12 +237,12 @@ export const Footer: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={link.platform}
-                        className="group relative flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-3 md:py-2 hover:bg-primary hover:border-primary transition-all duration-300"
+                        className="group relative flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg md:rounded-xl px-2.5 py-2.5 md:px-3 md:py-2 hover:bg-primary hover:border-primary transition-all duration-300"
                       >
                         {Icon && (
-                          <Icon className="text-white/60 group-hover:text-white transition-colors" size={16} />
+                          <Icon className="text-white/60 group-hover:text-white transition-colors" size={14} />
                         )}
-                        <span className="text-white/40 text-xs group-hover:text-white/80 transition-colors hidden sm:block">
+                        <span className="text-white/40 text-[10px] md:text-xs group-hover:text-white/80 transition-colors hidden sm:block">
                           {link.followers}
                         </span>
                       </a>
@@ -292,58 +287,35 @@ export const Footer: React.FC = () => {
                 ))}
               </div>
 
-              {/* MOBILE: Accordion */}
-              <div className="md:hidden">
+              {/* MOBILE: 2-Column Grid */}
+              <div className="md:hidden mt-6 pt-6 border-t border-white/10 grid grid-cols-2 gap-x-4 gap-y-8">
                 {footerColumns.map((col: FooterColumn) => (
-                  <div key={col.id} className="border-b border-white/10">
-                    <button
-                      className="flex items-center justify-between w-full text-left py-5 px-2 active:bg-white/5 transition-colors rounded-lg"
-                      onClick={() => handleColToggle(col.id)}
-                    >
-                      <span className="text-white font-bold text-[15px] uppercase tracking-wide">
-                        {col.title}
-                      </span>
-                      <ChevronDown
-                        size={20}
-                        className={`text-white/40 transition-transform duration-300 ${
-                          expandedCol === col.id ? "rotate-180" : "rotate-0"
-                        }`}
-                      />
-                    </button>
-                    <AnimatePresence initial={false}>
-                      {expandedCol === col.id && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.25 }}
-                          style={{ overflow: "hidden" }}
-                        >
-                          <ul className="pt-3 pb-1 space-y-3">
-                            {col.links.map((link: FooterLink) => (
-                              <li key={link.label}>
-                                <a
-                                  href={link.href}
-                                  target={link.isExternal ? "_blank" : "_self"}
-                                  rel={link.isExternal ? "noopener noreferrer" : undefined}
-                                  className="flex items-center gap-2 text-white/60 text-sm hover:text-white transition-colors duration-200 group py-2"
-                                >
-                                  {link.label}
-                                  {link.isBadge && (
-                                    <span className="bg-primary text-white text-[10px] px-1.5 py-0.5 rounded font-bold ml-1 inline-block">
-                                      {link.badgeText}
-                                    </span>
-                                  )}
-                                  {link.isExternal && (
-                                    <ExternalLink className="w-3 h-3 text-white/30 group-hover:text-white/60" />
-                                  )}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                  <div key={col.id}>
+                    <h4 className="text-white/40 text-[10px] font-semibold tracking-widest uppercase mb-4">
+                      {col.title}
+                    </h4>
+                    <ul className="space-y-2.5">
+                      {col.links.map((link: FooterLink) => (
+                        <li key={link.label}>
+                          <a
+                            href={link.href}
+                            target={link.isExternal ? "_blank" : "_self"}
+                            rel={link.isExternal ? "noopener noreferrer" : undefined}
+                            className="flex items-center gap-2 text-white/60 text-[12px] hover:text-white transition-colors duration-200 group"
+                          >
+                            {link.label}
+                            {link.isBadge && (
+                              <span className="bg-primary text-white text-[9px] px-1.5 py-0.5 rounded font-bold ml-1 inline-block">
+                                {link.badgeText}
+                              </span>
+                            )}
+                            {link.isExternal && (
+                              <ExternalLink className="w-3 h-3 text-white/30 group-hover:text-white/60" />
+                            )}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
@@ -351,54 +323,54 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* MIDDLE ROW */}
-          <div className="py-8 border-b border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="py-6 md:py-8 border-b border-white/10 flex flex-col md:flex-row items-center justify-between gap-5">
             <div className="flex flex-col items-center md:items-start w-full md:w-auto">
-              <span className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+              <span className="text-white/40 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-3 md:mb-4">
                 100% Secure Payments
               </span>
-              <div className="flex flex-row gap-5 items-center">
-                <UpiIcon className="h-5 w-auto text-white/40 hover:text-white transition-colors" />
-                <VisaIcon className="h-6 w-auto text-white/40 hover:text-white transition-colors" />
-                <MastercardIcon className="h-6 w-auto text-white/40 hover:text-white transition-colors" />
-                <RuPayIcon className="h-5 w-auto text-white/40 hover:text-white transition-colors" />
+              <div className="flex flex-row gap-4 md:gap-5 items-center">
+                <UpiIcon className="h-4 md:h-5 w-auto text-white/40 hover:text-white transition-colors" />
+                <VisaIcon className="h-5 md:h-6 w-auto text-white/40 hover:text-white transition-colors" />
+                <MastercardIcon className="h-5 md:h-6 w-auto text-white/40 hover:text-white transition-colors" />
+                <RuPayIcon className="h-4 md:h-5 w-auto text-white/40 hover:text-white transition-colors" />
               </div>
             </div>
 
-            <div className="flex flex-row gap-4 flex-wrap justify-center md:justify-end">
-              <div className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
-                <Lock size={14} className="text-green-400" />
-                <span className="text-white/60 text-xs">256-bit SSL</span>
+            <div className="flex flex-row gap-3 flex-wrap justify-center md:justify-end">
+              <div className="flex items-center gap-1 bg-white/5 border border-white/10 rounded-md px-2 py-1.5 md:px-3 md:py-2">
+                <Lock size={12} className="text-green-400" />
+                <span className="text-white/60 text-[10px] md:text-xs">256-bit SSL</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
-                <FileText size={14} className="text-blue-400" />
-                <span className="text-white/60 text-xs">GST Invoice</span>
+              <div className="flex items-center gap-1 bg-white/5 border border-white/10 rounded-md px-2 py-1.5 md:px-3 md:py-2">
+                <FileText size={12} className="text-blue-400" />
+                <span className="text-white/60 text-[10px] md:text-xs">GST Invoice</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
-                <span className="text-orange-400 text-xs">🇮🇳 Made in India</span>
+              <div className="flex items-center gap-1 bg-white/5 border border-white/10 rounded-md px-2 py-1.5 md:px-3 md:py-2">
+                <span className="text-orange-400 text-[10px] md:text-xs">🇮🇳 Made in India</span>
               </div>
             </div>
           </div>
 
           {/* BOTTOM ROW */}
-          <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+          <div className="pt-6 md:pt-8 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-center md:text-left">
             <div>
-              <p className="text-white/30 text-xs">
+              <p className="text-white/30 text-[10px] md:text-xs">
                 © {copyrightYear} HID PowerTools Pvt Ltd. All rights reserved.
               </p>
-              <p className="text-white/20 text-[10px] mt-1">
+              <p className="text-white/20 text-[9px] md:text-[10px] mt-1">
                 CIN: U28990GJ2024PTC000000 | GST: 24XXXXX0000X1ZX
               </p>
             </div>
             <div className="flex flex-row items-center gap-1 flex-wrap justify-center">
-              <a href="/privacy" className="text-white/30 text-xs hover:text-white/60 transition-colors duration-200">
+              <a href="/privacy" className="text-white/30 text-[10px] md:text-xs hover:text-white/60 transition-colors duration-200">
                 Privacy Policy
               </a>
               <span className="text-white/10 mx-1">|</span>
-              <a href="/terms" className="text-white/30 text-xs hover:text-white/60 transition-colors duration-200">
+              <a href="/terms" className="text-white/30 text-[10px] md:text-xs hover:text-white/60 transition-colors duration-200">
                 Terms of Service
               </a>
               <span className="text-white/10 mx-1">|</span>
-              <a href="/sitemap" className="text-white/30 text-xs hover:text-white/60 transition-colors duration-200">
+              <a href="/sitemap" className="text-white/30 text-[10px] md:text-xs hover:text-white/60 transition-colors duration-200">
                 Sitemap
               </a>
             </div>

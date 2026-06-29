@@ -71,26 +71,34 @@ export default async function HomePage() {
         {/* 2. Choose Your Tool (Categories) */}
         <CategoriesSlider categories={categories} />
 
-        {/* 3. Featured Collections */}
-        <FeaturedCollections />
+        {/* 3. Featured Collections (Hidden on Mobile) */}
+        <div className="hidden lg:block">
+          <FeaturedCollections />
+        </div>
 
-        {/* 4. Promotional Banner (Full Width Offer) */}
-        <PromotionalBannerMobile isAdmin={isAdmin} />
-
-        {/* 5. Best Sellers */}
+        {/* 4. Professional Picks (Featured Products) */}
         <FeaturedProducts isAdmin={isAdmin} />
+
+        {/* 5. Promotional Banner (Moved below Professional Picks) */}
+        <PromotionalBannerMobile isAdmin={isAdmin} />
 
         {/* 6. Why HID (Value Prop) */}
         <ValueProp />
 
-        {/* 7. Industrial Experience (Editorial Brand Section) */}
-        <IndustrialExperience />
+        {/* 7. Industrial Experience (Hidden on Mobile) */}
+        <div className="hidden lg:block">
+          <IndustrialExperience />
+        </div>
 
-        {/* 8. Testimonials */}
-        <Testimonials />
+        {/* 8. Testimonials (Hidden on Mobile) */}
+        <div className="hidden lg:block">
+          <Testimonials />
+        </div>
 
-        {/* 9. Newsletter */}
-        <NewsletterMobile />
+        {/* 9. Newsletter (Hidden on Mobile) */}
+        <div className="hidden lg:block">
+          <NewsletterMobile />
+        </div>
 
         {/* 10. Footer */}
         <Footer />
