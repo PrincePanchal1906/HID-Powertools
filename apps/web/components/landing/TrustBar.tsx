@@ -61,8 +61,12 @@ export const TrustBar: React.FC = () => {
                 <motion.div
                   key={index}
                   variants={statVariants}
-                  className="relative pl-6 py-2 flex flex-col group cursor-default transition-transform duration-500 hover:-translate-y-1"
+                  className="relative pl-6 py-4 flex flex-col group cursor-default transition-transform duration-500 hover:-translate-y-1 rounded-lg z-10"
                 >
+                  {/* Water Wave Effect */}
+                  <div className="water-wave-container">
+                    <div className="water-wave" />
+                  </div>
                   {/* Animated Left Border */}
                   <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gray-100 rounded-full overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-full bg-[#D42B2B] origin-top scale-y-50 group-hover:scale-y-100 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
@@ -150,6 +154,32 @@ export const TrustBar: React.FC = () => {
         }
         .animate-shine {
           animation: shine 9s infinite;
+        }
+        .water-wave-container {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          z-index: -1;
+          border-radius: 0.75rem;
+        }
+        .water-wave {
+          position: absolute;
+          width: 300px;
+          height: 300px;
+          background: rgba(212, 43, 43, 0.12);
+          border-radius: 38%;
+          left: 50%;
+          bottom: -320px;
+          margin-left: -150px;
+          animation: wave-spin 4s linear infinite;
+          transition: bottom 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover .water-wave {
+          bottom: -30px;
+        }
+        @keyframes wave-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
       `}} />
     </section>

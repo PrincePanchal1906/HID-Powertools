@@ -59,19 +59,17 @@ export const Navbar = ({ user }: { user: any }): React.JSX.Element => {
   };
 
   const publicLinks = [
-    { label: "Home", href: "/" },
-    { label: "Products", href: "/products" },
-    { label: "Categories", href: "/categories" },
-    { label: "Brands", href: "/brands" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
+    { label: "Equipment", href: "/products" },
+    { label: "Industries", href: "/categories" },
+    { label: "Service", href: "/contact" },
+    { label: "About HID", href: "/about" },
   ];
 
   const authLinks = [
-    { label: "Home", href: "/" },
-    { label: "Products", href: "/products" },
-    { label: "Categories", href: "/categories" },
-    { label: "Brands", href: "/brands" },
+    { label: "Equipment", href: "/products" },
+    { label: "Industries", href: "/categories" },
+    { label: "Service", href: "/contact" },
+    { label: "About HID", href: "/about" },
   ];
 
   const navLinks = user ? authLinks : publicLinks;

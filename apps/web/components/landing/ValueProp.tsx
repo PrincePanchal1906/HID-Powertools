@@ -78,24 +78,29 @@ export const ValueProp: React.FC<ValuePropProps> = () => {
       {/* =========================================
           MOBILE ONLY (lg:hidden)
       ========================================= */}
-      <div className="lg:hidden w-full relative bg-gray-900 overflow-hidden py-10 px-5">
+      <div className="lg:hidden w-full relative bg-gray-900 overflow-hidden py-[40px] px-[16px]">
         <div className="absolute inset-0 z-0">
           <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-[#D42B2B]/20 blur-[60px] rounded-full pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-black/90"></div>
         </div>
 
         <div className="relative z-10">
-          <h2 className="text-[22px] font-black text-white leading-tight uppercase mb-3">
+          <div className="flex items-center gap-[16px] mb-[8px]">
+            <span className="text-[11px] font-black text-[#D42B2B] tracking-widest uppercase bg-[#D42B2B]/10 px-[8px] py-[4px] rounded-[4px]">
+              /// THE HID DIFFERENCE
+            </span>
+          </div>
+          <h2 className="text-[28px] font-black text-white leading-tight uppercase mb-[16px] font-['var(--font-barlow-condensed)'] tracking-tight">
             WHY CHOOSE <br/>
             <span className="text-[#D42B2B]">HID POWERTOOLS?</span>
           </h2>
-          <p className="text-gray-300 text-[12px] leading-relaxed mb-8 max-w-[280px]">
+          <p className="text-gray-300 text-[15px] leading-relaxed mb-[40px] max-w-[280px]">
             We don't just build tools, we build trust. Every HID product is tested beyond limits to deliver unmatched performance on every job.
           </p>
 
-          <div className="grid grid-cols-2 gap-4 gap-y-8">
+          <div className="grid grid-cols-2 gap-[16px] gap-y-[32px]">
             <div className="flex flex-col items-start gap-1">
-              <div className="w-10 h-10 rounded-lg border border-white/20 flex items-center justify-center bg-white/5 text-white mb-2 shadow-sm">
+              <div className="w-10 h-10 rounded-[4px] border border-white/20 flex items-center justify-center bg-white/5 text-white mb-2 shadow-sm">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
               </div>
               <h3 className="text-white font-bold text-[13px]">Heavy Duty</h3>
@@ -103,7 +108,7 @@ export const ValueProp: React.FC<ValuePropProps> = () => {
             </div>
             
             <div className="flex flex-col items-start gap-1">
-              <div className="w-10 h-10 rounded-lg border border-white/20 flex items-center justify-center bg-white/5 text-white mb-2 shadow-sm">
+              <div className="w-10 h-10 rounded-[4px] border border-white/20 flex items-center justify-center bg-white/5 text-white mb-2 shadow-sm">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
               </div>
               <h3 className="text-white font-bold text-[13px]">Precision</h3>
@@ -111,7 +116,7 @@ export const ValueProp: React.FC<ValuePropProps> = () => {
             </div>
             
             <div className="flex flex-col items-start gap-1">
-              <div className="w-10 h-10 rounded-lg border border-white/20 flex items-center justify-center bg-white/5 text-white mb-2 shadow-sm">
+              <div className="w-10 h-10 rounded-[4px] border border-white/20 flex items-center justify-center bg-white/5 text-white mb-2 shadow-sm">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
               </div>
               <h3 className="text-white font-bold text-[13px]">Durability</h3>
@@ -119,7 +124,7 @@ export const ValueProp: React.FC<ValuePropProps> = () => {
             </div>
             
             <div className="flex flex-col items-start gap-1">
-              <div className="w-10 h-10 rounded-lg border border-white/20 flex items-center justify-center bg-white/5 text-white mb-2 shadow-sm">
+              <div className="w-10 h-10 rounded-[4px] border border-white/20 flex items-center justify-center bg-white/5 text-white mb-2 shadow-sm">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 8v4l3 3"></path></svg>
               </div>
               <h3 className="text-white font-bold text-[13px]">Service Support</h3>

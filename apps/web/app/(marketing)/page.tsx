@@ -1,15 +1,12 @@
 import HeroSection from "@/components/landing/HeroSection";
-import PromotionalBanner from "@/components/landing/PromotionalBanner";
-import PromotionalBannerMobile from "@/components/landing/PromotionalBannerMobile";
-import TrustBanner from "@/components/landing/TrustBanner";
 import CategoriesSlider from "@/components/landing/CategoriesSlider";
-import ValueProp from "@/components/landing/ValueProp";
-import Testimonials from "@/components/landing/Testimonials";
+import { FeaturedCollectionsMobile } from "@/components/landing/FeaturedCollectionsMobile";
+import PromotionalBannerMobile from "@/components/landing/PromotionalBannerMobile";
 import FeaturedProducts from "@/components/products/FeaturedProducts";
-import RiskReversal from "@/components/landing/RiskReversal";
+import ValueProp from "@/components/landing/ValueProp";
+import { IndustrialExperience } from "@/components/landing/IndustrialExperience";
+import Testimonials from "@/components/landing/Testimonials";
 import NewsletterMobile from "@/components/landing/NewsletterMobile";
-import MobileTrustBar from "@/components/landing/MobileTrustBar";
-import OffersOfTheWeek from "@/components/landing/OffersOfTheWeek";
 import Footer from "@/components/layout/Footer";
 import { createClient } from "@/lib/supabase/server";
 import { getCategories } from "@/lib/catalog/getCategories";
@@ -18,7 +15,6 @@ import { VisualCMSProvider } from "@/components/admin/visual/VisualCMSProvider";
 export default async function HomePage() {
   const supabase = await createClient();
 
-  // Run queries in parallel to significantly improve load time
   const [userRes, heroRes, offersRes, categories] = await Promise.all([
     supabase.auth.getUser(),
     supabase
@@ -82,57 +78,38 @@ export default async function HomePage() {
     }
   }) || [];
 
-  const offerItems = offersRes.data?.map((item: any) => ({
-    ...item.products,
-    category: { name: item.products.categories?.name || "FEATURED" }
-  })) || [];
-
   return (
     <VisualCMSProvider initialContent={{}}>
-      <main className="w-full overflow-x-hidden bg-[#f4f5f7] dark:bg-black lg:bg-white pb-20 lg:pb-0">
+      <main className="w-full overflow-x-hidden bg-white pb-20 lg:pb-0">
         
         {/* 1. Hero */}
         <HeroSection initialItems={carouselItems} isAdmin={isAdmin} />
 
-        {/* 1.5 Mobile Trust Bar */}
-        <MobileTrustBar />
-
-        <div className="hidden lg:block">
-          <PromotionalBanner />
-          <TrustBanner />
-        </div>
-
-        {/* 2. Categories (Mobile & Desktop handles its own view) */}
+        {/* 2. Choose Your Tool (Categories) */}
         <CategoriesSlider categories={categories} />
 
-        {/* 3. Offers Of The Week (Mobile) */}
-        <OffersOfTheWeek products={offerItems} />
+        {/* 3. Featured Collections */}
+        <FeaturedCollectionsMobile />
 
-        {/* 4. Mobile Promo Banners */}
-        <div className="block lg:hidden">
-          <PromotionalBannerMobile isAdmin={isAdmin} />
-        </div>
+        {/* 4. Promotional Banner (Full Width Offer) */}
+        <PromotionalBannerMobile isAdmin={isAdmin} />
 
-        {/* 4. Best Sellers (Mobile & Desktop handles its own view) */}
+        {/* 5. Best Sellers */}
         <FeaturedProducts isAdmin={isAdmin} />
 
-        {/* 5. Why Choose HID (Mobile & Desktop handles its own view) */}
+        {/* 6. Why HID (Value Prop) */}
         <ValueProp />
 
-        {/* 6. Testimonials (Mobile & Desktop handles its own view) */}
+        {/* 7. Industrial Experience (Editorial Brand Section) */}
+        <IndustrialExperience />
+
+        {/* 8. Testimonials */}
         <Testimonials />
 
-        {/* 7. Mobile Newsletter */}
-        <div className="block lg:hidden">
-          <NewsletterMobile />
-        </div>
+        {/* 9. Newsletter */}
+        <NewsletterMobile />
 
-        {/* Desktop Extras */}
-        <div className="hidden lg:block">
-          <RiskReversal />
-        </div>
-
-        {/* 8. Footer */}
+        {/* 10. Footer */}
         <Footer />
         
       </main>

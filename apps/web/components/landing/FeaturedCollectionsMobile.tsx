@@ -4,40 +4,55 @@ import Image from "next/image";
 
 export const FeaturedCollectionsMobile = () => {
   const collections = [
-    { title: "Heavy Duty Drills", image: "/images/hero-tool-light.png", link: "/categories" },
-    { title: "Grinders & Saws", image: "/placeholder.svg", link: "/categories" },
+    { 
+      title: "Heavy Duty Drills", 
+      subtitle: "Power through any material",
+      image: "/images/hero-tool-light.png", 
+      link: "/categories" 
+    },
+    { 
+      title: "Grinders & Saws", 
+      subtitle: "Precision cutting tools",
+      image: "/images/grinder-transparent.png", 
+      link: "/categories" 
+    },
   ];
 
   return (
-    <div className="w-full bg-[#f8f9fc] px-4 py-10 lg:hidden">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-[14px] font-black text-gray-900 tracking-tight uppercase">
-          Featured Collections
-        </h2>
-      </div>
-      
-      <div className="flex flex-col gap-4">
+    <div className="w-full bg-white lg:hidden">
+      <div className="flex flex-col">
         {collections.map((item, idx) => (
           <Link 
             key={idx} 
             href={item.link}
-            className="relative w-full h-[140px] rounded-2xl bg-white overflow-hidden shadow-sm active:scale-95 transition-transform border border-gray-100 flex items-center p-4"
+            className="relative w-full h-[220px] bg-[#f4f5f7] overflow-hidden group border-b border-gray-100 block"
           >
-            <div className="flex-1 z-10">
-              <h3 className="text-lg font-black text-gray-900 leading-tight w-[70%] uppercase">{item.title}</h3>
-              <span className="text-[11px] font-bold text-[#D42B2B] mt-2 inline-block tracking-wider uppercase">Shop Now &rarr;</span>
-            </div>
-            <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-center p-2 opacity-90 mix-blend-multiply">
+            {/* Dark overlay for contrast if we had real photos, but we use tool renders so we keep it light */}
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/60 to-transparent z-10" />
+            
+            <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[70%] h-[120%] z-0 pointer-events-none opacity-80 mix-blend-multiply">
               <div className="relative w-full h-full">
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  className="object-contain translate-x-4 scale-110"
+                  className="object-contain"
                 />
               </div>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none" />
+
+            <div className="absolute inset-0 p-[24px] flex flex-col justify-center z-20 w-[75%]">
+              <div className="flex items-center gap-[16px] mb-[8px]">
+                <span className="text-[10px] font-black text-[#D42B2B] tracking-widest uppercase bg-black/40 px-[8px] py-[4px] rounded-[4px]">
+                  /// EQUIPMENT
+                </span>
+              </div>
+              <h3 className="text-[28px] font-black text-white leading-[1.05] uppercase mb-[8px] font-['var(--font-barlow-condensed)'] tracking-tight">{item.title}</h3>
+              <p className="text-[15px] text-gray-300 mb-[16px] leading-tight font-medium">{item.subtitle}</p>
+              <span className="text-[11px] font-bold text-[#D42B2B] uppercase tracking-widest w-fit hover:text-white transition-colors">
+                View Loadout &rarr;
+              </span>
+            </div>
           </Link>
         ))}
       </div>
