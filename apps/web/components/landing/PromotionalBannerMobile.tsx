@@ -1,83 +1,79 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import dynamic from 'next/dynamic'
+import { useVisualCMS } from "../admin/visual/VisualCMSProvider";
 
-export default function PromotionalBannerMobile() {
-  return (
-    <section className="w-full px-5 py-6 flex gap-3">
-      {/* Left Banner: Summer Offer */}
-      <div className="flex-1 bg-gradient-to-br from-gray-900 to-black rounded-2xl p-4 relative overflow-hidden flex flex-col justify-between min-h-[200px] border border-gray-800">
-        <div className="z-10 flex flex-col">
+const AdminSectionWrapper = dynamic(() => import('../admin/visual/AdminSectionWrapper').then(m => m.AdminSectionWrapper), { ssr: false })
+
+export default function PromotionalBannerMobile({ isAdmin = false }: { isAdmin?: boolean }) {
+  const { content } = useVisualCMS();
+  
+  const bannerData = content['mobile_promo_banner'] || {
+    eyebrow: 'BUILT TO PERFORM ///',
+    titleLine1: 'POWER THAT BUILDS',
+    titleLine2: 'EVERYTHING',
+    subtitle: 'Reliable tools. Maximum performance.',
+    ctaText: 'Explore Now',
+    ctaLink: '/products',
+    image: '/images/hero-tool-light.png' 
+  };
+
+  const BannerInner = (
+    <section className="w-full px-4 py-4">
+      <div className="w-full bg-[#111111] rounded-[16px] p-5 relative overflow-hidden flex flex-col justify-between min-h-[160px] border border-gray-900 shadow-[0_10px_30px_rgba(0,0,0,0.15)]">
+        {/* Background Gradient/Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10" />
+
+        <div className="z-20 flex flex-col relative max-w-[65%]">
           <div className="flex items-center gap-1.5 mb-2">
-            <div className="w-[2px] h-2 bg-[#D42B2B]"></div>
-            <span className="text-[9px] font-bold text-white tracking-widest uppercase">
-              SUMMER OFFER
+            <span className="text-[10px] font-black text-[#D42B2B] tracking-widest uppercase">
+              {bannerData.eyebrow}
             </span>
           </div>
           
-          <h3 className="text-white font-black uppercase text-[18px] leading-tight mb-1">
-            UP TO <br/> <span className="text-[22px]">20% OFF</span>
+          <h3 className="text-white font-black uppercase text-[18px] sm:text-[20px] leading-[1.05] mb-2 tracking-tight">
+            {bannerData.titleLine1} <br/> <span className="text-[#D42B2B]">{bannerData.titleLine2}</span>
           </h3>
           
-          <p className="text-gray-400 text-[9px] max-w-[100px] mb-4 font-medium">
-            On Selected Power Tools
+          <p className="text-gray-400 text-[10px] sm:text-[11px] max-w-[130px] mb-4 font-medium leading-tight">
+            {bannerData.subtitle}
           </p>
-        </div>
-
-        <div className="z-10 mt-auto">
-          <Link href="/products?sale=true" className="bg-[#D42B2B] text-white text-[10px] font-bold px-3 py-1.5 rounded flex items-center justify-center gap-1 w-fit hover:bg-red-700 transition-colors">
-            Shop Now <ArrowRight size={10} />
+          
+          <Link href={bannerData.ctaLink} className="bg-black text-white text-[10px] font-bold px-4 py-2.5 rounded-[6px] flex items-center justify-center gap-1.5 w-fit hover:bg-gray-900 transition-colors border border-gray-800 shadow-md">
+            {bannerData.ctaText} <ArrowRight size={12} />
           </Link>
         </div>
 
         {/* Absolute Image */}
-        <div className="absolute right-[-20px] bottom-[-10px] w-[130px] h-[130px] z-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#D42B2B]/20 blur-[20px] rounded-full"></div>
+        <div className="absolute right-[-15%] top-1/2 -translate-y-1/2 w-[65%] h-[120%] z-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#D42B2B]/10 blur-[30px] rounded-full"></div>
           <Image 
-            src="/images/grinder-transparent.png" 
-            alt="Grinder" 
+            src={bannerData.image} 
+            alt={bannerData.titleLine1} 
             fill 
-            className="object-contain drop-shadow-2xl"
-          />
-        </div>
-      </div>
-
-      {/* Right Banner: New Arrival */}
-      <div className="flex-1 bg-gradient-to-br from-[#D42B2B] to-[#991A1A] rounded-2xl p-4 relative overflow-hidden flex flex-col justify-between min-h-[200px]">
-        <div className="z-10 flex flex-col">
-          <div className="flex items-center gap-1.5 mb-2">
-            <div className="w-[2px] h-2 bg-white"></div>
-            <span className="text-[9px] font-bold text-white tracking-widest uppercase">
-              NEW ARRIVAL
-            </span>
-          </div>
-          
-          <h3 className="text-white font-black uppercase text-[18px] leading-tight mb-1">
-            HID X7 <br/> <span className="text-[12px] opacity-90">ROTARY HAMMER</span>
-          </h3>
-          
-          <p className="text-white/80 text-[9px] max-w-[100px] mb-4 font-medium">
-            Power. Precision. Performance.
-          </p>
-        </div>
-
-        <div className="z-10 mt-auto">
-          <Link href="/products/hid-x7" className="bg-white text-gray-900 text-[10px] font-bold px-3 py-1.5 rounded flex items-center justify-center gap-1 w-fit hover:bg-gray-100 transition-colors">
-            Explore Now <ArrowRight size={10} />
-          </Link>
-        </div>
-
-        {/* Absolute Image */}
-        <div className="absolute right-[-25px] bottom-[-10px] w-[140px] h-[140px] z-0 pointer-events-none">
-          <Image 
-            src="/images/hammer-transparent.png" 
-            alt="Rotary Hammer" 
-            fill 
-            className="object-contain drop-shadow-2xl"
+            className="object-contain drop-shadow-2xl mix-blend-normal"
+            sizes="(max-width: 768px) 50vw"
           />
         </div>
       </div>
     </section>
   );
+
+  if (isAdmin) {
+    return (
+      <AdminSectionWrapper 
+        drawerId="mobile_promo_banner" 
+        buttonText="Edit Promotional Banner"
+        className="block"
+      >
+        {BannerInner}
+      </AdminSectionWrapper>
+    )
+  }
+
+  return BannerInner;
 }

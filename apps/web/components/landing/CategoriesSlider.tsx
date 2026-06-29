@@ -8,28 +8,28 @@ export const CategoriesSlider = ({ categories }: { categories: Category[] }) => 
   if (!categories || categories.length === 0) return null;
 
   return (
-    <section className="w-full bg-white pt-8 pb-10 lg:hidden border-b border-gray-100">
-      <div className="flex items-center justify-between px-4 mb-6">
-        <h2 className="text-[15px] font-black text-gray-900 tracking-tight uppercase flex items-center gap-1">
-          Top Categories
+    <section className="w-full bg-[#f4f5f7] pt-6 pb-8 lg:hidden">
+      <div className="flex items-center justify-between px-4 mb-4">
+        <h2 className="text-[14px] font-black text-gray-900 tracking-tight uppercase">
+          Popular Categories
         </h2>
         <Link 
           href="/categories"
-          className="text-gray-500 text-[10px] font-bold flex items-center gap-1 hover:text-[#D42B2B] uppercase tracking-[0.1em]"
+          className="text-[#D42B2B] text-[12px] font-bold flex items-center gap-1 hover:text-[#b82323] transition-colors"
         >
-          View all <ArrowRight className="w-3 h-3" />
+          View All <ArrowRight className="w-3 h-3" />
         </Link>
       </div>
 
-      <div className="flex overflow-x-auto snap-x snap-mandatory px-4 gap-4 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div className="flex overflow-x-auto snap-x snap-mandatory px-4 gap-3 pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {categories.map((category) => (
           <Link 
             key={category.id} 
             href={`/categories/${category.slug}`}
-            className="flex flex-col snap-start shrink-0 group w-[42vw] max-w-[160px]"
+            className="flex flex-col snap-start shrink-0 group w-[38vw] max-w-[150px] aspect-square bg-[#f0f1f3] rounded-[12px] p-3 relative shadow-sm border border-black/5"
           >
-            {/* Image Container */}
-            <div className="w-full aspect-square bg-[#f8f9fc] rounded-2xl flex items-center justify-center mb-3 overflow-hidden border border-gray-100 transition-colors">
+            {/* Image */}
+            <div className="absolute inset-0 pb-8 flex items-center justify-center">
               <div className="relative w-[75%] h-[75%] mix-blend-multiply">
                 <ImageWithFallback
                   src={`/images/categories/${category.slug}.png`}
@@ -37,18 +37,18 @@ export const CategoriesSlider = ({ categories }: { categories: Category[] }) => 
                   alt={category.name}
                   fill
                   sizes="160px"
-                  className="object-contain drop-shadow-sm transition-transform duration-500 group-hover:scale-105"
+                  className="object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.15)] transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
             </div>
 
-            {/* Label */}
-            <div className="w-full flex items-center justify-between px-1">
-              <span className="text-[13px] font-black text-gray-900 tracking-tight truncate pr-2">
+            {/* Bottom Content (Inside Card) */}
+            <div className="mt-auto flex items-end justify-between z-10 w-full relative">
+              <span className="text-[10px] font-black text-gray-900 leading-[1.1] uppercase max-w-[70%]">
                 {category.name}
               </span>
-              <div className="w-6 h-6 rounded-full bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100 transition-colors group-hover:bg-[#D42B2B] group-hover:border-[#D42B2B] group-hover:text-white text-gray-400">
-                <ArrowRight className="w-3 h-3" strokeWidth={3} />
+              <div className="w-5 h-5 rounded-[4px] bg-[#D42B2B] text-white flex items-center justify-center shrink-0 shadow-sm transition-colors group-hover:bg-[#b82323]">
+                <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
               </div>
             </div>
           </Link>

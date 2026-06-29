@@ -79,10 +79,10 @@ export const Navbar = ({ user }: { user: any }): React.JSX.Element => {
   const isHome = pathname === "/";
   const isTransparent = isHome && !isScrolled && !isMobileOpen;
   
-  const textPrimary = isTransparent ? "text-white" : "text-gray-900";
-  const textMuted = isTransparent ? "text-white/80 hover:text-white" : "text-gray-600 hover:text-[#D42B2B]";
-  const iconColor = isTransparent ? "text-white hover:text-gray-200" : "text-gray-900 hover:text-[#D42B2B]";
-  const logoRed = isTransparent ? "text-white" : "text-[#D42B2B]";
+  const textPrimary = isTransparent ? "text-gray-900 lg:text-white" : "text-gray-900";
+  const textMuted = isTransparent ? "text-gray-600 lg:text-white/80 hover:text-[#D42B2B] lg:hover:text-white" : "text-gray-600 hover:text-[#D42B2B]";
+  const iconColor = isTransparent ? "text-gray-900 lg:text-white hover:text-[#D42B2B] lg:hover:text-gray-200" : "text-gray-900 hover:text-[#D42B2B]";
+  const logoRed = isTransparent ? "text-[#D42B2B] lg:text-white" : "text-[#D42B2B]";
 
   if (pathname.startsWith('/admin') || pathname.startsWith('/account')) {
     return <></>; 
@@ -93,7 +93,7 @@ export const Navbar = ({ user }: { user: any }): React.JSX.Element => {
       <nav
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isTransparent
-            ? "bg-transparent py-6"
+            ? "bg-white lg:bg-transparent py-3 lg:py-6 shadow-sm lg:shadow-none"
             : isScrolled || isMobileOpen
             ? "bg-white shadow-lg shadow-black/5 py-3" 
             : "bg-white border-b border-gray-100 py-4"

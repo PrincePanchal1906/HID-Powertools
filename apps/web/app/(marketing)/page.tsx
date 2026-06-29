@@ -110,7 +110,7 @@ export default async function HomePage() {
 
         {/* 4. Mobile Promo Banners */}
         <div className="block lg:hidden">
-          <PromotionalBannerMobile />
+          <PromotionalBannerMobile isAdmin={isAdmin} />
         </div>
 
         {/* 4. Best Sellers (Mobile & Desktop handles its own view) */}
