@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ImageWithFallback } from "../ui/ImageWithFallback";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin,
@@ -42,11 +41,17 @@ import {
   footerColumns,
   socialLinks,
   contactDetails,
-  paymentMethods,
   footerTagline,
   copyrightYear,
 } from "../../lib/data/footerData";
-import type { FooterColumn, FooterLink, SocialLink, ContactDetail, PaymentMethod } from "@hid/types";
+import type { FooterColumn, FooterLink, SocialLink, ContactDetail } from "@hid/types";
+
+import {
+  VisaIcon,
+  MastercardIcon,
+  RuPayIcon,
+  UpiIcon,
+} from "../ui/PaymentIcons";
 
 const iconMap: Record<string, React.FC<any>> = {
   Instagram: InstagramIcon,
@@ -348,24 +353,14 @@ export const Footer: React.FC = () => {
           {/* MIDDLE ROW */}
           <div className="py-8 border-b border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex flex-col items-center md:items-start w-full md:w-auto">
-              <span className="text-white/40 text-xs uppercase tracking-widest mb-3">
-                WE ACCEPT
+              <span className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+                100% Secure Payments
               </span>
-              <div className="flex flex-row gap-3 flex-wrap justify-center items-center">
-                {paymentMethods.map((method: PaymentMethod) => (
-                  <div
-                    key={method.name}
-                    className="bg-white rounded-lg px-3 py-1.5 flex items-center justify-center hover:scale-110 transition-transform duration-200"
-                  >
-                    <ImageWithFallback
-                      src={method.src}
-                      alt={method.name}
-                      width={method.width}
-                      height={method.height}
-                      className="object-contain"
-                    />
-                  </div>
-                ))}
+              <div className="flex flex-row gap-5 items-center">
+                <UpiIcon className="h-5 w-auto text-white/40 hover:text-white transition-colors" />
+                <VisaIcon className="h-6 w-auto text-white/40 hover:text-white transition-colors" />
+                <MastercardIcon className="h-6 w-auto text-white/40 hover:text-white transition-colors" />
+                <RuPayIcon className="h-5 w-auto text-white/40 hover:text-white transition-colors" />
               </div>
             </div>
 

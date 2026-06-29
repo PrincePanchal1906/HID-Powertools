@@ -3,9 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck, Gauge } from "lucide-react";
 import dynamic from 'next/dynamic'
-import { useVisualCMS } from "../admin/visual/VisualCMSProvider";
 
 const AdminSectionWrapper = dynamic(() => import('../admin/visual/AdminSectionWrapper').then(m => m.AdminSectionWrapper), { ssr: false })
 
@@ -99,70 +98,87 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isAdmin }) => {
   };
 
   const HeroInner = (
-    <section className="relative w-full bg-[#f8f9fc] min-h-[450px] h-[100dvh] max-h-[600px] flex flex-col overflow-hidden">
+    <section id="hero-section" className="relative w-full bg-[#0a0a0a] h-[100dvh] min-h-[600px] max-h-[850px] flex flex-col overflow-hidden text-white">
       
-      {/* Background with subtle grid/texture for premium feel */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#D42B2B]/5 rounded-full blur-[80px]" />
-        <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-blue-500/5 rounded-full blur-[80px]" />
+      {/* Dark Industrial Background with Red Accents */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] opacity-20" />
+        <div className="absolute top-[10%] -left-[20%] w-[60%] h-[50%] bg-[#D42B2B] rounded-full mix-blend-screen blur-[120px] opacity-[0.15]" />
+        <div className="absolute bottom-[20%] -right-[20%] w-[70%] h-[60%] bg-[#111111] rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/30 via-transparent to-[#0a0a0a] z-0" />
       </div>
 
       {/* Snap Container */}
       <div 
         ref={scrollContainerRef}
-        className="w-full h-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar z-10 relative pt-[70px]"
+        className="w-full h-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar z-10 relative pt-[90px] pb-6"
         style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
         onScroll={handleScroll}
       >
         {heroSlides.map((slide, idx) => (
-          <div key={slide.id} className="w-full h-full shrink-0 snap-center snap-always flex relative items-center pb-12">
+          <div key={slide.id} className="w-full h-full shrink-0 snap-center snap-always flex flex-col justify-between relative px-6">
             
-            {/* Right: Absolute Image Section (Creative placement) */}
-            <div className="absolute right-[-60px] top-1/2 -translate-y-[55%] w-[320px] h-[320px] pointer-events-none z-0">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] bg-white rounded-full blur-[40px]" />
+            {/* Top Content (Eyebrow, Headline, Subtitle) */}
+            <div className="flex flex-col relative z-20 mt-2">
+              {/* Eyebrow */}
+              <div className="flex items-center mb-5">
+                <div className="border border-[#D42B2B]/40 bg-[#D42B2B]/10 px-3 py-1.5 rounded-full flex items-center gap-2 backdrop-blur-sm shadow-[0_0_15px_rgba(212,43,43,0.15)]">
+                  <div className="w-1.5 h-1.5 bg-[#D42B2B] rounded-full shadow-[0_0_8px_#D42B2B]" />
+                  <span className="text-[#D42B2B] font-black tracking-[0.2em] text-[10px] uppercase">
+                    {slide.eyebrow}
+                  </span>
+                </div>
+              </div>
+
+              {/* Headline */}
+              <h1 className="font-black uppercase font-['var(--font-barlow-condensed)'] text-[56px] sm:text-[68px] leading-[0.9] tracking-tight mb-4 drop-shadow-2xl">
+                <span className="block text-white">{slide.titleLine1}</span>
+                <span className="block text-[#D42B2B]">{slide.titleLine2}</span>
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-gray-400 text-[13px] leading-[1.6] max-w-[260px] font-medium">
+                {slide.description.replace(/\n/g, ' ')}
+              </p>
+            </div>
+
+            {/* Product Image (Absolute positioning, ~45% visual area) */}
+            <div className="absolute right-[-20px] top-[26%] sm:top-[22%] w-[80%] max-w-[340px] aspect-square pointer-events-none z-10">
               <Image 
                 src={slide.image} 
                 alt={slide.titleLine1 + " " + slide.titleLine2} 
                 fill 
                 priority={idx === 0}
-                className="object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.15)] mix-blend-darken scale-110"
-                sizes="(max-width: 768px) 100vw"
+                className="object-contain drop-shadow-[0_40px_50px_rgba(0,0,0,0.9)] mix-blend-normal"
+                sizes="(max-width: 768px) 80vw"
               />
             </div>
-
-            {/* Left: Content Section */}
-            <div className="flex flex-col px-5 z-10 w-[65%] mt-[-40px]">
-              {/* Eyebrow */}
-              <div className="flex items-center mb-2">
-                <div className="w-1 h-3.5 bg-[#D42B2B] mr-2 shadow-[0_0_8px_rgba(212,43,43,0.3)] rounded-full" />
-                <span className="text-[#D42B2B] font-bold tracking-[0.15em] text-[9px] uppercase">
-                  {slide.eyebrow}
-                </span>
+            
+            {/* Bottom Content (Trust Features, CTAs) */}
+            <div className="flex flex-col w-full relative z-20 mt-auto pb-4">
+              {/* Trust Features (Max 2 compact items) */}
+              <div className="flex items-center gap-8 mb-7 pt-7 border-t border-white/10 w-max">
+                <div className="flex items-center gap-2.5">
+                  <ShieldCheck className="w-5 h-5 text-gray-400" />
+                  <span className="text-white/80 text-[10px] font-bold uppercase tracking-[0.1em] leading-tight">Built<br/>Tough</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Gauge className="w-5 h-5 text-gray-400" />
+                  <span className="text-white/80 text-[10px] font-bold uppercase tracking-[0.1em] leading-tight">Max<br/>Power</span>
+                </div>
               </div>
 
-              {/* Slogan */}
-              <h1 className="font-black uppercase font-['var(--font-barlow-condensed)'] text-[46px] leading-[0.85] tracking-tight mb-3">
-                <span className="block text-gray-900 drop-shadow-sm">{slide.titleLine1}</span>
-                <span className="block text-[#D42B2B] drop-shadow-sm">{slide.titleLine2}</span>
-              </h1>
-
-              {/* Subtitle */}
-              <p className="text-gray-500 text-[11px] leading-[1.5] max-w-[160px] font-medium mb-6">
-                {slide.description.replace(/\n/g, ' ')}
-              </p>
-
-              {/* 2 CTA Buttons */}
-              <div className="flex flex-col gap-2 w-max">
+              {/* CTAs (Centered, premium) */}
+              <div className="flex flex-col gap-3 w-full max-w-[320px] mx-auto">
                 <Link 
                   href={slide.primaryLink}
-                  className="bg-[#D42B2B] text-white px-5 py-2.5 rounded-[8px] font-bold transition-transform flex items-center justify-center gap-2 text-[12px] active:scale-[0.98] shadow-[0_6px_15px_rgba(212,43,43,0.25)]"
+                  className="bg-[#D42B2B] hover:bg-[#b82323] text-white py-3.5 rounded-[12px] font-bold transition-all flex items-center justify-center gap-2 text-[14px] active:scale-[0.98] shadow-[0_8px_25px_rgba(212,43,43,0.35)] w-full"
                 >
-                  {slide.primaryButton} <ArrowRight size={14} />
+                  {slide.primaryButton} <ArrowRight size={16} />
                 </Link>
                 <Link 
                   href={slide.secondaryLink}
-                  className="bg-white border border-gray-200 text-gray-700 px-5 py-2.5 rounded-[8px] font-bold transition-colors flex items-center justify-center text-[12px] active:bg-gray-50 shadow-sm"
+                  className="bg-transparent border border-white/20 hover:bg-white/5 text-white py-3.5 rounded-[12px] font-bold transition-all flex items-center justify-center gap-2 text-[14px] active:scale-[0.98] w-full"
                 >
                   {slide.secondaryButton}
                 </Link>
@@ -174,12 +190,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isAdmin }) => {
       </div>
 
       {/* Pagination Indicators */}
-      <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-20 pointer-events-none">
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2.5 z-20 pointer-events-none">
         {heroSlides.map((_, i) => (
           <div 
             key={i} 
-            className={`h-[4px] rounded-full transition-all duration-300 ${
-              i === activeIndex ? 'bg-[#D42B2B] w-6' : 'bg-gray-300 w-1.5'
+            className={`h-[3px] rounded-full transition-all duration-300 ${
+              i === activeIndex ? 'bg-[#D42B2B] w-8 shadow-[0_0_8px_#D42B2B]' : 'bg-white/30 w-2'
             }`}
           />
         ))}

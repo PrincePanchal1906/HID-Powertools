@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import { ImageEditForm } from './forms/ImageEditForm'
 import { HeroProductManager } from './forms/HeroProductManager'
 import { ProductListManager } from './forms/ProductListManager'

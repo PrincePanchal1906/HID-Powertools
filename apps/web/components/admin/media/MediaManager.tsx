@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { uploadMedia, listMedia, deleteMedia } from '@/actions/admin/media'
-import { Loader2, UploadCloud, Trash2, Check, Copy, Search, RefreshCw } from 'lucide-react'
+import { Loader2, UploadCloud, Trash2, Copy, Search, RefreshCw } from 'lucide-react'
 import Image from 'next/image'
 
 export interface MediaFile {
@@ -35,7 +35,7 @@ export function MediaManager({ onSelect, bucket = 'images', folder = '', classNa
     try {
       const res = await listMedia(bucket, folder)
       if (res.error) throw new Error(res.error)
-      setFiles(res.data || [])
+      setFiles((res.data as MediaFile[]) || [])
     } catch (err: any) {
       setError(err.message)
     } finally {

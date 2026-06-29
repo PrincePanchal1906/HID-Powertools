@@ -17,6 +17,28 @@ export const Navbar = ({ user }: { user: any }): React.JSX.Element => {
   const router = useRouter();
 
   useEffect(() => {
+    // Only apply the hero observer on the home page
+    if (pathname === "/") {
+      const heroSection = document.getElementById("hero-section");
+      
+      if (heroSection) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const [entry] = entries;
+            // When Hero leaves viewport completely, Navbar becomes solid
+            if (entry) {
+              setIsScrolled(!entry.isIntersecting);
+            }
+          },
+          { root: null, threshold: 0 }
+        );
+        
+        observer.observe(heroSection);
+        return () => observer.disconnect();
+      }
+    }
+
+    // Fallback for other pages or if hero isn't found
     const handleScroll = (): void => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -25,7 +47,7 @@ export const Navbar = ({ user }: { user: any }): React.JSX.Element => {
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,9 +139,11 @@ export const Navbar = ({ user }: { user: any }): React.JSX.Element => {
                 aria-label="Cart"
               >
                 <ShoppingCart size={24} />
-                <span className="absolute top-0 right-0 w-4 h-4 bg-[#D42B2B] text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-transparent">
-                  2
-                </span>
+                {cartCount > 0 && (
+                  <span className="absolute top-0 right-0 w-4 h-4 bg-[#D42B2B] text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-transparent">
+                    {cartCount}
+                  </span>
+                )}
               </button>
             </div>
             
@@ -184,9 +208,11 @@ export const Navbar = ({ user }: { user: any }): React.JSX.Element => {
                 aria-label="Cart"
               >
                 <ShoppingCart size={24} />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#D42B2B] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                  2
-                </span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#D42B2B] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
               </button>
               
               <div className="flex items-center gap-3">

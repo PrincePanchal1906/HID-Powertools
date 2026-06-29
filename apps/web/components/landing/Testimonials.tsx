@@ -3,7 +3,7 @@
 import React from "react";
 import { ImageWithFallback } from "../ui/ImageWithFallback";
 import { motion, useInView, type Variants } from "framer-motion";
-import { ChevronLeft, ChevronRight, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { testimonials, caseStudies, reviewPlatforms } from "../../lib/data/testimonialsData";
 import { HorizontalScroll } from "../ui/HorizontalScroll";
 import { StarRating } from "@hid/ui/star-rating";
@@ -81,50 +81,42 @@ export const Testimonials: React.FC<TestimonialsProps> = () => {
         {/* =========================================
             MOBILE ONLY (lg:hidden)
         ========================================= */}
-        <div className="lg:hidden w-full bg-white py-6 px-5 border-t border-gray-100">
-          <h2 className="text-[16px] font-black leading-tight uppercase mb-4 text-gray-900">
-            TRUSTED BY <br/>
-            <span className="text-[#D42B2B]">PROFESSIONALS</span>
-          </h2>
+        <div className="lg:hidden w-full bg-white py-8 border-t border-gray-100">
+          <div className="px-5 mb-5 flex items-center justify-between">
+            <h2 className="text-[15px] font-black leading-tight uppercase text-gray-900 tracking-tight">
+              Trusted By <br/>
+              <span className="text-[#D42B2B]">Professionals</span>
+            </h2>
+            <div className="bg-green-50 text-green-600 px-2 py-1 rounded text-[9px] font-bold uppercase tracking-wider flex items-center gap-1">
+               <CheckCircle size={10} /> Verified
+            </div>
+          </div>
 
-          <div className="relative w-full mt-2">
-            <div className="w-full bg-[#f8f9fc] rounded-[20px] overflow-hidden border border-gray-100 flex p-5 min-h-[180px] shadow-sm relative">
-              {/* Left Content */}
-              <div className="flex-1 flex flex-col justify-between pr-24 z-10">
-                <div className="relative">
-                  <span className="text-[#D42B2B] text-2xl font-serif absolute -top-1 -left-2 leading-none">"</span>
-                  <p className="text-gray-700 text-[11px] font-medium leading-relaxed italic pl-2 mb-4">
-                    HID tools are our first choice on every site. Powerful, durable and built to handle the toughest jobs.
-                  </p>
-                </div>
-                
-                <div className="flex flex-col">
-                  <span className="font-bold text-gray-900 text-[12px]">Rohit Sharma</span>
-                  <span className="text-gray-500 text-[9px] mb-1">Site Manager, BuildCon Infra</span>
-                  <div className="flex text-[#D42B2B] text-[10px]">
-                    ★★★★<span className="text-gray-300">★</span>
+          <div className="flex overflow-x-auto snap-x snap-mandatory px-5 gap-3 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            {testimonials.map((testimonial: Testimonial) => (
+              <div key={testimonial.id} className="snap-start shrink-0 w-[240px]">
+                <div className="flex flex-col bg-[#f8f9fc] rounded-[16px] p-4 border border-gray-100 h-[150px] shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
+                  <div className="flex items-center gap-1 mb-2">
+                    <div className="scale-[0.8] origin-left">
+                      <StarRating rating={testimonial.rating} size="sm" />
+                    </div>
+                  </div>
+                  <div className="relative flex-1">
+                    <span className="absolute -top-2 left-0 text-[#D42B2B] text-4xl font-serif leading-none select-none opacity-20">"</span>
+                    <p className="text-gray-700 text-[12px] font-medium leading-snug italic pl-1 relative z-10 line-clamp-3">
+                      {testimonial.quote}
+                    </p>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 pt-3 border-t border-gray-200/60 mt-auto">
+                    <div className="flex flex-col">
+                      <span className="font-bold text-gray-900 text-[11px] leading-tight mb-0.5">{testimonial.name}</span>
+                      <span className="text-gray-500 text-[9px] uppercase tracking-wider font-bold truncate max-w-[200px]">{testimonial.role}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              {/* Right Image */}
-              <div className="w-[140px] absolute right-0 top-0 bottom-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#f8f9fc] via-transparent to-transparent z-10 w-12"></div>
-                <img 
-                  src="/images/hero-tool-light.png" 
-                  alt="Professional using tool"
-                  className="w-full h-full object-cover scale-[1.5] translate-x-4 object-right"
-                />
-              </div>
-            </div>
-
-            {/* Navigation Arrows */}
-            <button className="absolute -left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center z-20 text-gray-600 border border-gray-50">
-              <ChevronLeft size={16} />
-            </button>
-            <button className="absolute -right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center z-20 text-gray-600 border border-gray-50">
-              <ChevronRight size={16} />
-            </button>
+            ))}
           </div>
         </div>
 

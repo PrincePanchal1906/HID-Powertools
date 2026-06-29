@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import { getListProducts } from '@/actions/admin/productLists'
 import { OffersCarousel } from './OffersCarousel'
-import { OfferCard } from './OfferCard'
 import { Gift, Tag, ShieldCheck, Truck, Headphones, ArrowRight } from 'lucide-react'
 import dynamic from 'next/dynamic'
 

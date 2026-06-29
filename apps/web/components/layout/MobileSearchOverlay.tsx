@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, X, ArrowUpRight, TrendingUp, Clock } from "lucide-react";
+import { Search, ArrowUpRight, TrendingUp, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const MobileSearchOverlay = () => {

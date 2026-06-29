@@ -8,6 +8,8 @@ import Testimonials from "@/components/landing/Testimonials";
 import FeaturedProducts from "@/components/products/FeaturedProducts";
 import RiskReversal from "@/components/landing/RiskReversal";
 import NewsletterMobile from "@/components/landing/NewsletterMobile";
+import MobileTrustBar from "@/components/landing/MobileTrustBar";
+import OffersOfTheWeek from "@/components/landing/OffersOfTheWeek";
 import Footer from "@/components/layout/Footer";
 import { createClient } from "@/lib/supabase/server";
 import { getCategories } from "@/lib/catalog/getCategories";
@@ -17,7 +19,7 @@ export default async function HomePage() {
   const supabase = await createClient();
 
   // Run queries in parallel to significantly improve load time
-  const [userRes, heroRes, categories] = await Promise.all([
+  const [userRes, heroRes, offersRes, categories] = await Promise.all([
     supabase.auth.getUser(),
     supabase
       .from('homepage_product_sections')
@@ -36,6 +38,23 @@ export default async function HomePage() {
         )
       `)
       .eq('section_key', 'hero')
+      .order('display_order', { ascending: true }),
+    supabase
+      .from('homepage_product_sections')
+      .select(`
+        product_id,
+        display_order,
+        products (
+          id,
+          name,
+          slug,
+          thumbnail_url,
+          price,
+          compare_price,
+          categories ( name )
+        )
+      `)
+      .eq('section_key', 'offers')
       .order('display_order', { ascending: true }),
     getCategories()
   ]);
@@ -63,12 +82,20 @@ export default async function HomePage() {
     }
   }) || [];
 
+  const offerItems = offersRes.data?.map((item: any) => ({
+    ...item.products,
+    category: { name: item.products.categories?.name || "FEATURED" }
+  })) || [];
+
   return (
     <VisualCMSProvider initialContent={{}}>
       <main className="w-full overflow-x-hidden bg-[#f4f5f7] dark:bg-black lg:bg-white pb-20 lg:pb-0">
         
         {/* 1. Hero */}
         <HeroSection initialItems={carouselItems} isAdmin={isAdmin} />
+
+        {/* 1.5 Mobile Trust Bar */}
+        <MobileTrustBar />
 
         <div className="hidden lg:block">
           <PromotionalBanner />
@@ -78,7 +105,10 @@ export default async function HomePage() {
         {/* 2. Categories (Mobile & Desktop handles its own view) */}
         <CategoriesSlider categories={categories} />
 
-        {/* 3. Mobile Promo Banners */}
+        {/* 3. Offers Of The Week (Mobile) */}
+        <OffersOfTheWeek products={offerItems} />
+
+        {/* 4. Mobile Promo Banners */}
         <div className="block lg:hidden">
           <PromotionalBannerMobile />
         </div>

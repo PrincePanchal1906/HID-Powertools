@@ -16,7 +16,7 @@ interface AdminEditWrapperProps {
   buttons: EditButtonConfig[];
 }
 
-export function AdminEditWrapper({ sectionId, children, className = '', buttons }: AdminEditWrapperProps) {
+export function AdminEditWrapper({ children, className = '', buttons }: AdminEditWrapperProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
