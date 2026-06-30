@@ -2,49 +2,14 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-  Send,
-  Loader2,
-  CheckCircle,
-  Lock,
-  FileText,
-  ArrowUp,
-  ChevronDown,
-  ExternalLink,
-} from "lucide-react";
-
-const FacebookIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-);
-
-const InstagramIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-);
-
-const YoutubeIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
-);
-
-const LinkedinIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-);
-
-const TwitterIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-);
+import { Phone, Mail, ArrowUp } from "lucide-react";
 
 import {
   footerColumns,
-  socialLinks,
-  contactDetails,
   footerTagline,
   copyrightYear,
 } from "../../lib/data/footerData";
-import type { FooterColumn, FooterLink, SocialLink, ContactDetail } from "@hid/types";
+import type { FooterColumn } from "@hid/types";
 
 import {
   VisaIcon,
@@ -53,31 +18,60 @@ import {
   UpiIcon,
 } from "../ui/PaymentIcons";
 
-const iconMap: Record<string, React.FC<any>> = {
-  Instagram: InstagramIcon,
-  Youtube: YoutubeIcon,
-  Linkedin: LinkedinIcon,
-  Facebook: FacebookIcon,
-  Twitter: TwitterIcon,
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-  Send,
-  Loader2,
-  CheckCircle,
-  Lock,
-  FileText,
-  ArrowUp,
-  ChevronDown,
-  ExternalLink,
+const FooterAccordion = ({ column }: { column: FooterColumn }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-white/10 md:border-none">
+      <button 
+        className="w-full flex justify-between items-center py-[16px] md:py-0 md:mb-[20px] text-left md:pointer-events-none"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="text-white font-bold tracking-widest text-[13px] md:text-[12px] uppercase">
+          {column.title}
+        </span>
+        <span className="text-white/50 text-[18px] md:hidden">{isOpen ? '−' : '+'}</span>
+      </button>
+      
+      {/* Mobile Accordion Content */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden md:hidden"
+          >
+            <ul className="pb-[16px] space-y-[12px]">
+              {column.links.map(link => (
+                <li key={link.label}>
+                   <a href={link.href} className="text-white/60 text-[14px] active:text-white flex items-center gap-2">
+                     {link.label}
+                     {link.isBadge && <span className="bg-[#D42B2B] text-white text-[9px] px-1.5 py-0.5 rounded uppercase font-bold">{link.badgeText}</span>}
+                   </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Desktop Grid Content (Always Visible) */}
+      <ul className="hidden md:block space-y-[12px]">
+        {column.links.map(link => (
+          <li key={link.label}>
+             <a href={link.href} className="text-white/60 text-[13px] hover:text-white flex items-center gap-2 transition-colors">
+               {link.label}
+               {link.isBadge && <span className="bg-[#D42B2B] text-white text-[9px] px-1.5 py-0.5 rounded uppercase font-bold">{link.badgeText}</span>}
+             </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export const Footer: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,295 +81,64 @@ export const Footer: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
-
-  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setStatus("loading");
-    timeoutRef.current = setTimeout(() => {
-      setStatus("success");
-      setEmail("");
-    }, 1200);
-  };
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer role="contentinfo" className="overflow-hidden">
-      {/* PART A — Newsletter Bar */}
-      <div className="bg-white md:bg-[#D42B2B] py-6 md:py-12 px-4 md:px-16">
-        <div className="max-w-7xl mx-auto bg-[#D42B2B] rounded-[20px] md:rounded-none p-5 md:p-0 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8 shadow-xl md:shadow-none shadow-red-500/20">
-          <div className="text-center md:text-left">
-            <h3 className="font-black text-white text-[20px] md:text-3xl leading-tight tracking-tight">
-              Get Deals, Tips & New Arrivals First.
-            </h3>
-            <p className="text-white/90 text-[12px] md:text-sm mt-1.5 font-medium leading-relaxed">
-              Join 12,000+ contractors who get our weekly tool drop. No spam.
+    <footer role="contentinfo" className="overflow-hidden bg-[#0a0a0a]">
+      <div className="max-w-[1920px] mx-auto px-[16px] lg:px-[5%] xl:px-[8%] pt-[32px] md:pt-[64px] pb-[24px]">
+        
+        {/* Brand Section */}
+        <div className="flex flex-col md:flex-row justify-between items-start mb-[24px] md:mb-[48px] gap-[24px]">
+          <div className="w-full md:w-1/3">
+            <h2 className="font-black text-[24px] text-white tracking-tight font-['var(--font-barlow-condensed)'] uppercase">
+              HID PowerTools
+            </h2>
+            <p className="text-white/50 text-[13px] md:text-[14px] mt-[8px] max-w-[280px] leading-relaxed">
+              {footerTagline}
             </p>
-          </div>
-
-          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-2.5 w-full md:w-auto mt-2 md:mt-0">
-            <div className="flex flex-col flex-1 relative w-full">
-              <input
-                type="email"
-                value={email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                required
-                disabled={status === "loading" || status === "success"}
-                className="w-full md:w-72 px-4 py-3 rounded-[10px] text-[14px] bg-white/10 border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:border-white focus:bg-white/20 transition duration-200"
-              />
-              {status === "success" && (
-                <motion.p
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="absolute -bottom-6 left-0 text-white/80 text-xs whitespace-nowrap"
-                >
-                  You are on the list. Welcome to the HID family.
-                </motion.p>
-              )}
-            </div>
-            <button
-              type="submit"
-              disabled={status === "loading" || status === "success"}
-              className={`px-5 py-3 rounded-[10px] font-black text-[14px] whitespace-nowrap transition duration-200 flex items-center justify-center gap-2 w-full sm:w-auto active:scale-95 ${
-                status === "success"
-                  ? "bg-green-500 text-white"
-                  : "bg-gray-900 text-white hover:bg-black"
-              }`}
-            >
-              {status === "idle" && (
-                <>
-                  Subscribe <Send size={16} className="ml-1" />
-                </>
-              )}
-              {status === "loading" && (
-                <>
-                  <Loader2 className="animate-spin" size={14} /> Sending...
-                </>
-              )}
-              {status === "success" && (
-                <>
-                  <CheckCircle size={14} /> Subscribed!
-                </>
-              )}
-              {status === "error" && "Try Again"}
-            </button>
-          </form>
-        </div>
-      </div>
-
-      {/* PART B — Main Footer Body */}
-      <div className="bg-gray-900 pt-8 md:pt-16 pb-6 md:pb-8 px-4 md:px-16">
-        <div className="max-w-7xl mx-auto">
-          {/* TOP ROW */}
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 pb-8 md:pb-12 border-b border-white/10">
-            {/* LEFT BLOCK */}
-            <div className="lg:w-1/3">
-              <div>
-                <span className="font-black text-xl md:text-2xl text-white tracking-tight">
-                  HID
-                </span>
-                <span className="font-light text-white/70 tracking-tight ml-1 text-sm md:text-base">
-                  PowerTools
-                </span>
-              </div>
-              <p className="text-white/50 text-xs md:text-sm mt-2 md:mt-3 leading-relaxed max-w-xs">
-                {footerTagline}
-              </p>
-
-              <div className="mt-6 md:mt-8 space-y-3 md:space-y-4">
-                {contactDetails.map((detail: ContactDetail) => {
-                  const Icon = iconMap[detail.icon];
-                  const inner = (
-                    <>
-                      {Icon && <Icon className="text-primary flex-shrink-0 mt-0.5" size={14} />}
-                      <div>
-                        <span className="text-white/40 text-[10px] md:text-xs font-medium block">
-                          {detail.label}
-                        </span>
-                        <span className="text-white/80 text-xs md:text-sm">
-                          {detail.value}
-                        </span>
-                      </div>
-                    </>
-                  );
-                  return detail.href ? (
-                    <a
-                      key={detail.label}
-                      href={detail.href}
-                      className="flex items-start gap-2.5 md:gap-3 hover:text-primary transition-colors duration-200"
-                    >
-                      {inner}
-                    </a>
-                  ) : (
-                    <div key={detail.label} className="flex items-start gap-2.5 md:gap-3">
-                      {inner}
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="mt-6 md:mt-8">
-                <h4 className="text-white/40 text-[10px] md:text-xs font-semibold tracking-widest uppercase mb-3 md:mb-4">
-                  FOLLOW US
-                </h4>
-                <div className="flex flex-row gap-2 md:gap-3 flex-wrap">
-                  {socialLinks.map((link: SocialLink) => {
-                    const Icon = iconMap[link.icon];
-                    return (
-                      <a
-                        key={link.platform}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={link.platform}
-                        className="group relative flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg md:rounded-xl px-2.5 py-2.5 md:px-3 md:py-2 hover:bg-primary hover:border-primary transition-all duration-300"
-                      >
-                        {Icon && (
-                          <Icon className="text-white/60 group-hover:text-white transition-colors" size={14} />
-                        )}
-                        <span className="text-white/40 text-[10px] md:text-xs group-hover:text-white/80 transition-colors hidden sm:block">
-                          {link.followers}
-                        </span>
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT BLOCK */}
-            <div className="lg:w-2/3">
-              {/* DESKTOP: 4-column grid */}
-              <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-8">
-                {footerColumns.map((col: FooterColumn) => (
-                  <div key={col.id}>
-                    <h4 className="text-white/40 text-xs font-semibold tracking-widest uppercase mb-5">
-                      {col.title}
-                    </h4>
-                    <ul className="space-y-3">
-                      {col.links.map((link: FooterLink) => (
-                        <li key={link.label}>
-                          <a
-                            href={link.href}
-                            target={link.isExternal ? "_blank" : "_self"}
-                            rel={link.isExternal ? "noopener noreferrer" : undefined}
-                            className="flex items-center gap-2 text-white/60 text-sm hover:text-white transition-colors duration-200 group py-1"
-                          >
-                            {link.label}
-                            {link.isBadge && (
-                              <span className="bg-primary text-white text-[10px] px-1.5 py-0.5 rounded font-bold ml-1 inline-block">
-                                {link.badgeText}
-                              </span>
-                            )}
-                            {link.isExternal && (
-                              <ExternalLink className="w-3 h-3 text-white/30 group-hover:text-white/60" />
-                            )}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-
-              {/* MOBILE: 2-Column Grid */}
-              <div className="md:hidden mt-6 pt-6 border-t border-white/10 grid grid-cols-2 gap-x-4 gap-y-8">
-                {footerColumns.map((col: FooterColumn) => (
-                  <div key={col.id}>
-                    <h4 className="text-white/40 text-[10px] font-semibold tracking-widest uppercase mb-4">
-                      {col.title}
-                    </h4>
-                    <ul className="space-y-2.5">
-                      {col.links.map((link: FooterLink) => (
-                        <li key={link.label}>
-                          <a
-                            href={link.href}
-                            target={link.isExternal ? "_blank" : "_self"}
-                            rel={link.isExternal ? "noopener noreferrer" : undefined}
-                            className="flex items-center gap-2 text-white/60 text-[12px] hover:text-white transition-colors duration-200 group"
-                          >
-                            {link.label}
-                            {link.isBadge && (
-                              <span className="bg-primary text-white text-[9px] px-1.5 py-0.5 rounded font-bold ml-1 inline-block">
-                                {link.badgeText}
-                              </span>
-                            )}
-                            {link.isExternal && (
-                              <ExternalLink className="w-3 h-3 text-white/30 group-hover:text-white/60" />
-                            )}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+            <div className="mt-[16px] flex flex-col gap-[12px]">
+              <a href="tel:+917900000000" className="flex items-center gap-[10px] text-white/70 active:text-white md:hover:text-white transition-colors">
+                <Phone size={16} className="text-white/40" />
+                <span className="text-[14px] font-medium">+91 79000 00000</span>
+              </a>
+              <a href="mailto:hello@hidpowertools.com" className="flex items-center gap-[10px] text-white/70 active:text-white md:hover:text-white transition-colors">
+                <Mail size={16} className="text-white/40" />
+                <span className="text-[14px] font-medium">hello@hidpowertools.com</span>
+              </a>
             </div>
           </div>
 
-          {/* MIDDLE ROW */}
-          <div className="py-6 md:py-8 border-b border-white/10 flex flex-col md:flex-row items-center justify-between gap-5">
-            <div className="flex flex-col items-center md:items-start w-full md:w-auto">
-              <span className="text-white/40 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-3 md:mb-4">
-                100% Secure Payments
-              </span>
-              <div className="flex flex-row gap-4 md:gap-5 items-center">
-                <UpiIcon className="h-4 md:h-5 w-auto text-white/40 hover:text-white transition-colors" />
-                <VisaIcon className="h-5 md:h-6 w-auto text-white/40 hover:text-white transition-colors" />
-                <MastercardIcon className="h-5 md:h-6 w-auto text-white/40 hover:text-white transition-colors" />
-                <RuPayIcon className="h-4 md:h-5 w-auto text-white/40 hover:text-white transition-colors" />
-              </div>
-            </div>
-
-            <div className="flex flex-row gap-3 flex-wrap justify-center md:justify-end">
-              <div className="flex items-center gap-1 bg-white/5 border border-white/10 rounded-md px-2 py-1.5 md:px-3 md:py-2">
-                <Lock size={12} className="text-green-400" />
-                <span className="text-white/60 text-[10px] md:text-xs">256-bit SSL</span>
-              </div>
-              <div className="flex items-center gap-1 bg-white/5 border border-white/10 rounded-md px-2 py-1.5 md:px-3 md:py-2">
-                <FileText size={12} className="text-blue-400" />
-                <span className="text-white/60 text-[10px] md:text-xs">GST Invoice</span>
-              </div>
-              <div className="flex items-center gap-1 bg-white/5 border border-white/10 rounded-md px-2 py-1.5 md:px-3 md:py-2">
-                <span className="text-orange-400 text-[10px] md:text-xs">🇮🇳 Made in India</span>
-              </div>
-            </div>
-          </div>
-
-          {/* BOTTOM ROW */}
-          <div className="pt-6 md:pt-8 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-center md:text-left">
-            <div>
-              <p className="text-white/30 text-[10px] md:text-xs">
-                © {copyrightYear} HID PowerTools Pvt Ltd. All rights reserved.
-              </p>
-              <p className="text-white/20 text-[9px] md:text-[10px] mt-1">
-                CIN: U28990GJ2024PTC000000 | GST: 24XXXXX0000X1ZX
-              </p>
-            </div>
-            <div className="flex flex-row items-center gap-1 flex-wrap justify-center">
-              <a href="/privacy" className="text-white/30 text-[10px] md:text-xs hover:text-white/60 transition-colors duration-200">
-                Privacy Policy
-              </a>
-              <span className="text-white/10 mx-1">|</span>
-              <a href="/terms" className="text-white/30 text-[10px] md:text-xs hover:text-white/60 transition-colors duration-200">
-                Terms of Service
-              </a>
-              <span className="text-white/10 mx-1">|</span>
-              <a href="/sitemap" className="text-white/30 text-[10px] md:text-xs hover:text-white/60 transition-colors duration-200">
-                Sitemap
-              </a>
+          {/* Navigation Accordions (Mobile) / Grid (Desktop) */}
+          <div className="w-full md:w-2/3">
+            <div className="flex flex-col md:grid md:grid-cols-4 md:gap-[32px] border-t border-white/10 md:border-none">
+              {footerColumns.map((col) => (
+                <FooterAccordion key={col.id} column={col} />
+              ))}
             </div>
           </div>
         </div>
+
+        {/* Payment Methods */}
+        <div className="flex justify-center md:justify-end gap-[24px] py-[24px] border-t border-white/10">
+          <UpiIcon className="h-[20px] w-auto text-white/30 grayscale opacity-70" />
+          <VisaIcon className="h-[20px] w-auto text-white/30 grayscale opacity-70" />
+          <MastercardIcon className="h-[20px] w-auto text-white/30 grayscale opacity-70" />
+          <RuPayIcon className="h-[20px] w-auto text-white/30 grayscale opacity-70" />
+        </div>
+
+        {/* Footer Bottom */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-[12px] pt-[24px] border-t border-white/10">
+          <div className="text-white/30 text-[12px] font-medium">
+            © {copyrightYear} HID PowerTools
+          </div>
+          <div className="flex items-center gap-[24px] text-white/30 text-[12px] font-medium">
+            <a href="/privacy" className="active:text-white md:hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms" className="active:text-white md:hover:text-white transition-colors">Terms & Conditions</a>
+          </div>
+        </div>
+
       </div>
 
       {/* BACK TO TOP BUTTON */}
@@ -388,7 +151,7 @@ export const Footer: React.FC = () => {
             transition={{ duration: 0.2 }}
             onClick={scrollToTop}
             aria-label="Back to top"
-            className="fixed bottom-8 right-8 z-30 bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg shadow-primary/40 hover:bg-primary-dark hover:scale-110 transition-all duration-200"
+            className="fixed bottom-[24px] right-[24px] z-30 bg-[#D42B2B] text-white rounded-full w-[44px] h-[44px] flex items-center justify-center shadow-lg shadow-black/40 active:scale-95 md:hover:bg-red-700 md:hover:scale-105 transition-all duration-200"
           >
             <ArrowUp size={20} />
           </motion.button>

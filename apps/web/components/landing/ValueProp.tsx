@@ -1,67 +1,56 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, Wrench, Truck, Award } from "lucide-react";
+import { ShieldCheck, Wrench, Truck, Award, Headphones } from "lucide-react";
 
 export const ValueProp: React.FC = () => {
   const benefits = [
     { 
-      icon: <Wrench size={20} />, 
+      icon: <Wrench size={18} strokeWidth={2.5} />, 
       title: "Industrial Grade",
-      desc: "Built for demanding professional environments."
+      desc: "Built for demanding jobsites"
     },
     { 
-      icon: <ShieldCheck size={20} />, 
-      title: "Warranty Support",
-      desc: "Reliable support and product coverage."
-    },
-    { 
-      icon: <Truck size={20} />, 
+      icon: <Truck size={18} strokeWidth={2.5} />, 
       title: "Fast Delivery",
-      desc: "Quick dispatch across supported regions."
+      desc: "Quick dispatch nationwide"
     },
     { 
-      icon: <Award size={20} />, 
-      title: "Trusted Quality",
-      desc: "Tools trusted by professionals every day."
+      icon: <Headphones size={18} strokeWidth={2.5} />, 
+      title: "Dedicated Support",
+      desc: "Experts ready to help"
+    },
+    { 
+      icon: <ShieldCheck size={18} strokeWidth={2.5} />, 
+      title: "Reliable Warranty",
+      desc: "Peace of mind guaranteed"
     },
   ];
 
   return (
-    <section className="w-full bg-[#0D0D0D] py-[32px] lg:py-[120px] relative overflow-hidden">
+    <section className="w-full bg-[#0D0D0D] py-[24px] lg:py-[64px] relative overflow-hidden border-t border-white/5">
       <div className="relative z-20 max-w-[1920px] mx-auto px-[16px] lg:px-[5%] xl:px-[8%]">
         
-        {/* Header Content */}
-        <div className="flex flex-col mb-[16px] lg:mb-[48px] items-center text-center">
-          <div className="flex items-center gap-[16px] mb-[16px]">
-            <span className="text-[12px] font-black text-[#D42B2B] tracking-widest uppercase bg-white/5 border border-white/10 px-[12px] py-[6px] rounded-[4px]">
-              /// THE HID DIFFERENCE
-            </span>
-          </div>
-          <h2 className="text-[28px] lg:text-[48px] font-black text-white leading-tight uppercase font-['var(--font-barlow-condensed)'] tracking-tight">
-            WHY CHOOSE <span className="text-[#D42B2B]">HID</span>
-          </h2>
-        </div>
+        <h2 className="text-[20px] lg:text-[32px] font-black text-white leading-tight uppercase font-['var(--font-barlow-condensed)'] tracking-tight mb-[20px] lg:mb-[32px] text-center">
+          WHY CHOOSE HID?
+        </h2>
 
-        {/* 2x2 Mobile / 4-Col Desktop Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-[12px] lg:gap-[48px]">
+        {/* 2x2 Grid, Highly Compact */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-[12px] lg:gap-[24px]">
           {benefits.map((benefit, idx) => (
             <div 
               key={idx} 
-              className="flex flex-col items-start lg:items-center lg:text-center gap-[12px]"
+              className="flex flex-col bg-white/5 rounded-[8px] p-[16px] lg:p-[24px] border border-white/5"
             >
-              <div className="w-[32px] h-[32px] lg:w-[48px] lg:h-[48px] rounded-[4px] bg-white/5 border border-white/10 flex items-center justify-center text-[#D42B2B] shrink-0">
+              <div className="text-[#D42B2B] mb-[12px]">
                 {benefit.icon}
               </div>
-              
-              <div className="flex flex-col gap-[8px]">
-                <h3 className="text-white font-bold text-[16px] lg:text-[18px] uppercase tracking-wide font-['var(--font-barlow-condensed)']">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-400 text-[14px] lg:text-[14px] leading-relaxed">
-                  {benefit.desc}
-                </p>
-              </div>
+              <h3 className="text-white font-bold text-[14px] lg:text-[16px] uppercase tracking-wide font-['var(--font-barlow-condensed)'] leading-tight mb-[4px] flex items-center gap-1.5">
+                <span className="text-[#D42B2B] text-[12px]">✓</span> {benefit.title}
+              </h3>
+              <p className="text-gray-400 text-[12px] lg:text-[14px] leading-snug">
+                {benefit.desc}
+              </p>
             </div>
           ))}
         </div>

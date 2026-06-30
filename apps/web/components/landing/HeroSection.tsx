@@ -67,19 +67,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ initialItems, isAdmin 
           {/* Eyebrow */}
           <div className="mb-[8px] lg:mb-[16px]">
             <span className="text-[#D42B2B] font-black tracking-widest text-[12px] lg:text-[12px] uppercase">
-              PROFESSIONAL GRADE TOOLS
+              /// HEAVY DUTY
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="font-black uppercase font-['var(--font-barlow-condensed)'] text-[40px] sm:text-[48px] lg:text-[100px] xl:text-[120px] leading-[0.85] tracking-tight mb-[8px] lg:mb-[32px] text-[#0F172A] relative z-30">
-            <span className="block">BUILT TO</span>
-            <span className="block">OUTLAST.</span>
+            <span className="block">BUILT FOR</span>
+            <span className="block">PROFESSIONALS</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-gray-600 text-[14px] sm:text-[16px] lg:text-[20px] leading-relaxed font-medium mb-[16px] lg:mb-[48px] max-w-[95%] lg:max-w-[480px]">
-            Engineered for professionals who refuse to compromise on performance.
+            Industrial grade power tools engineered for demanding jobsites.
           </p>
           
           {/* CTAs */}
@@ -88,13 +88,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ initialItems, isAdmin 
               href="/products"
               className="bg-[#D42B2B] hover:bg-[#b82323] text-white py-[8px] lg:py-4 rounded-[4px] font-bold transition-all flex items-center justify-center gap-2 px-3 lg:px-8 text-[14px] lg:text-[16px] shadow-sm w-full lg:w-auto"
             >
-              Shop Tools <ArrowRight size={14} className="lg:w-4 lg:h-4" />
+              View Collection <ArrowRight size={14} className="lg:w-4 lg:h-4" />
             </Link>
             <Link 
               href="/collections"
               className="bg-transparent border-[1.5px] border-gray-900 text-gray-900 hover:bg-gray-50 py-[6px] lg:py-[14px] rounded-[4px] font-bold transition-all flex items-center justify-center gap-2 px-3 lg:px-8 text-[14px] lg:text-[16px] w-full lg:w-auto"
             >
-              Collections <ArrowRight size={14} className="lg:w-4 lg:h-4" />
+              Explore Products <ArrowRight size={14} className="lg:w-4 lg:h-4" />
             </Link>
           </div>
         </div>

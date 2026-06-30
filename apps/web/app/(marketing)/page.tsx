@@ -1,11 +1,12 @@
 import HeroSection from "@/components/landing/HeroSection";
+import TrustStrip from "@/components/landing/TrustStrip";
 import CategoriesSlider from "@/components/landing/CategoriesSlider";
 import { FeaturedCollections } from "@/components/landing/FeaturedCollections";
-import PromotionalBannerMobile from "@/components/landing/PromotionalBannerMobile";
 import FeaturedProducts from "@/components/products/FeaturedProducts";
-import ValueProp from "@/components/landing/ValueProp";
+import { ValueProp } from "@/components/landing/ValueProp";
 import { IndustrialExperience } from "@/components/landing/IndustrialExperience";
 import Testimonials from "@/components/landing/Testimonials";
+import { FAQ } from "@/components/landing/FAQ";
 import NewsletterMobile from "@/components/landing/NewsletterMobile";
 import Footer from "@/components/layout/Footer";
 import { createClient } from "@/lib/supabase/server";
@@ -67,6 +68,9 @@ export default async function HomePage() {
         
         {/* 1. Hero */}
         <HeroSection initialItems={carouselItems} isAdmin={isAdmin} />
+        
+        {/* Trust Strip */}
+        <TrustStrip />
 
         {/* 2. Choose Your Tool (Categories) */}
         <CategoriesSlider categories={categories} />
@@ -79,8 +83,6 @@ export default async function HomePage() {
         {/* 4. Professional Picks (Featured Products) */}
         <FeaturedProducts isAdmin={isAdmin} />
 
-        {/* 5. Promotional Banner (Moved below Professional Picks) */}
-        <PromotionalBannerMobile isAdmin={isAdmin} />
 
         {/* 6. Why HID (Value Prop) */}
         <ValueProp />
@@ -90,12 +92,13 @@ export default async function HomePage() {
           <IndustrialExperience />
         </div>
 
-        {/* 8. Testimonials (Hidden on Mobile) */}
-        <div className="hidden lg:block">
-          <Testimonials />
-        </div>
+        {/* 8. Testimonials */}
+        <Testimonials />
 
-        {/* 9. Newsletter (Hidden on Mobile) */}
+        {/* 9. FAQ Section */}
+        <FAQ />
+
+        {/* 10. Newsletter (Hidden on Mobile) */}
         <div className="hidden lg:block">
           <NewsletterMobile />
         </div>

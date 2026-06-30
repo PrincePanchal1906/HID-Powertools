@@ -31,7 +31,7 @@ export default async function FeaturedProducts({ isAdmin = false }: FeaturedProd
             </span>
           </div>
           <h2 className="text-[28px] lg:text-[56px] font-black text-gray-900 tracking-tight uppercase font-['var(--font-barlow-condensed)'] leading-none">
-            PROFESSIONAL PICKS
+            OFFERS OF THE WEEK
           </h2>
         </div>
 
@@ -45,7 +45,7 @@ export default async function FeaturedProducts({ isAdmin = false }: FeaturedProd
                 /// THE HID STANDARD
               </span>
               <h2 className="text-[24px] font-black text-gray-900 tracking-tight uppercase font-['var(--font-barlow-condensed)'] leading-none">
-                PROFESSIONAL PICKS
+                OFFERS OF THE WEEK
               </h2>
             </div>
             <Link href="/products" className="text-[12px] font-bold text-gray-900 uppercase tracking-wider flex items-center mb-[2px]">
@@ -53,15 +53,12 @@ export default async function FeaturedProducts({ isAdmin = false }: FeaturedProd
             </Link>
           </div>
 
-          <div className="grid grid-cols-3 gap-[6px] bg-gray-50 p-[8px] rounded-[12px] border border-gray-100">
-            {/* Pad the array so we always show 6 boxes for layout visualization */}
-            {Array.from({ length: 6 }).map((_, index) => {
-              const product = displayProducts[index % displayProducts.length] || displayProducts[0];
-              if (!product) return null; // Fallback if absolutely no products
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-[12px] pb-[8px] scrollbar-hide -mx-[12px] px-[12px]">
+            {displayProducts.map((product: any, index: number) => {
+              if (!product) return null;
               
               const priceInr = product.price < 500 ? (product.price * 82).toLocaleString('en-IN') : product.price.toLocaleString('en-IN');
               
-              // Split name to match screenshot style
               const nameParts = product.name.split(' ');
               const lastWord = nameParts.length > 1 ? nameParts.pop() : '';
               const firstPart = nameParts.join(' ');
@@ -70,12 +67,14 @@ export default async function FeaturedProducts({ isAdmin = false }: FeaturedProd
                 <Link 
                   href={`/products/${product.slug}`} 
                   key={`${product.id}-${index}`} 
-                  className="flex flex-col bg-white rounded-[6px] overflow-hidden border border-gray-100 h-full relative shadow-sm"
+                  className="flex flex-col bg-white rounded-[8px] overflow-hidden border border-gray-100 h-full relative shadow-sm snap-start min-w-[140px] w-[140px] flex-shrink-0"
                 >
-                  <div className="absolute top-[4px] right-[4px] bg-red-50 text-[#D42B2B] text-[7px] font-black px-[4px] py-[2px] rounded-[4px] z-10">
-                    NEW
-                  </div>
-                  <div className="w-full aspect-square bg-white flex items-center justify-center p-2 relative">
+                  {product.is_new_arrival && (
+                    <div className="absolute top-[6px] right-[6px] bg-red-50 text-[#D42B2B] text-[8px] font-black px-[6px] py-[3px] rounded-[4px] z-10">
+                      NEW
+                    </div>
+                  )}
+                  <div className="w-full aspect-square bg-[#f4f5f7] flex items-center justify-center p-3 relative">
                     <img 
                       src={product.thumbnail_url || "/images/hero-tool-light.png"}
                       alt={product.name}
@@ -83,35 +82,27 @@ export default async function FeaturedProducts({ isAdmin = false }: FeaturedProd
                       className="w-full h-full object-contain mix-blend-normal hover:scale-105 transition-transform"
                     />
                   </div>
-                  <div className="p-[6px] flex flex-col flex-1 justify-between">
+                  <div className="p-[10px] flex flex-col flex-1 justify-between">
                     <div>
-                      <h3 className="text-[10px] font-bold text-gray-900 leading-tight mb-[1px] line-clamp-1">
+                      <h3 className="text-[12px] font-bold text-gray-900 leading-tight mb-[2px] line-clamp-1">
                         {firstPart || product.name}
                       </h3>
                       {firstPart && (
-                        <div className="text-[10px] font-bold text-gray-900 mb-[4px] line-clamp-1">
+                        <div className="text-[12px] font-bold text-gray-900 mb-[6px] line-clamp-1">
                           {lastWord}
                         </div>
                       )}
-                      <div className="font-medium text-gray-500 text-[9px] mb-[6px]">
+                      <div className="font-black text-[#D42B2B] text-[11px] mb-[8px]">
                         ₹{priceInr}
                       </div>
                     </div>
-                    <div className="flex items-center text-[9px] font-bold text-gray-900 uppercase tracking-wider mt-auto">
-                      VIEW <span className="ml-[2px] text-[#D42B2B]">→</span>
+                    <div className="flex items-center text-[10px] font-black text-gray-900 uppercase tracking-wider mt-auto">
+                      VIEW <span className="ml-[4px] text-[#D42B2B]">→</span>
                     </div>
                   </div>
                 </Link>
               );
             })}
-          </div>
-          
-          <div className="flex justify-center items-center gap-[6px] mt-[20px]">
-            <div className="w-[6px] h-[6px] rounded-full bg-[#D42B2B]"></div>
-            <div className="w-[6px] h-[6px] rounded-full bg-gray-200"></div>
-            <div className="w-[6px] h-[6px] rounded-full bg-gray-200"></div>
-            <div className="w-[6px] h-[6px] rounded-full bg-gray-200"></div>
-            <div className="w-[6px] h-[6px] rounded-full bg-gray-200"></div>
           </div>
         </div>
 
