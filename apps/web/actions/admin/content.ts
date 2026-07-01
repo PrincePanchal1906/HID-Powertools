@@ -22,7 +22,8 @@ export async function getSiteContent(key: string) {
 export async function updateSiteContent(key: string, content: any) {
   const supabase = await createClient()
   
-  const { data: { user } } = await supabase.auth.getUser()
+  const userRes = await supabase.auth.getUser()
+  const user = userRes.data?.user
   if (!user) return { error: 'Unauthorized' }
   
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()

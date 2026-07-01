@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, Wrench, Truck, Award, Headphones } from "lucide-react";
+import { ShieldCheck, Wrench, Truck, Headphones } from "lucide-react";
 
 export const ValueProp: React.FC = () => {
   const benefits = [

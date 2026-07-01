@@ -15,7 +15,8 @@ export async function uploadMedia(formData: FormData) {
   const supabase = await createClient();
   
   // Validate Admin
-  const { data: { user } } = await supabase.auth.getUser();
+  const userRes = await supabase.auth.getUser();
+  const user = userRes.data?.user;
   if (!user) return { error: 'Unauthorized' };
   
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single();
@@ -46,7 +47,8 @@ export async function uploadMedia(formData: FormData) {
 export async function deleteMedia(bucket: string, path: string) {
   const supabase = await createClient();
   
-  const { data: { user } } = await supabase.auth.getUser();
+  const userRes = await supabase.auth.getUser();
+  const user = userRes.data?.user;
   if (!user) return { error: 'Unauthorized' };
   
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single();

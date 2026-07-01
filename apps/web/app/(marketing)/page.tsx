@@ -39,7 +39,7 @@ export default async function HomePage() {
     getCategories()
   ]);
 
-  const { data: { user } } = userRes;
+  const user = userRes.data?.user || null;
   let isAdmin = false;
   if (user) {
     const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single();

@@ -5,9 +5,14 @@ import { redirect } from "next/navigation";
 
 export async function getCurrentUser() {
   const supabase = createClient();
-  const { data: { user }, error } = await supabase.auth.getUser();
-  if (error || !user) return null;
-  return user;
+  try {
+    const { data, error } = await supabase.auth.getUser();
+    if (error || !data?.user) return null;
+    return data.user;
+  } catch (err) {
+    console.error('getCurrentUser failed:', err);
+    return null;
+  }
 }
 
 export async function getCurrentProfile(): Promise<Profile | null> {

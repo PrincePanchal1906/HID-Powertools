@@ -24,7 +24,8 @@ export async function login(_prevState: any, formData: FormData) {
 
   // update last_login_at and determine redirect
   let redirectUrl = '/'
-  const { data: { user } } = await supabase.auth.getUser()
+  const userRes = await supabase.auth.getUser()
+  const user = userRes.data?.user
   if (user) {
     const { data: profile } = await supabase
       .from('profiles')
